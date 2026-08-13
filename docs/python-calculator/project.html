@@ -1,0 +1,445 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Python Calculator | Ashok</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+
+    <style>
+
+        .code-box {
+            background-color: #111827;
+
+            color: #e5e7eb;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            overflow-x: auto;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            white-space: pre;
+
+            margin-top: 20px;
+        }
+
+
+        .code-label {
+            display: inline-block;
+
+            margin-bottom: 10px;
+
+            padding: 6px 12px;
+
+            background-color: #374151;
+
+            color: white;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        .project-actions {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .code-box {
+                font-size: 12px;
+
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="nav-container">
+
+            <div class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="../about.html">
+                    About
+                </a>
+
+                <a href="../index.html#skills">
+                    Skills
+                </a>
+
+                <a href="../index.html#projects">
+                    Projects
+                </a>
+
+                <a href="../index.html#contact">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <a
+                class="theme-button"
+                href="../index.html"
+            >
+                ← Back to Portfolio
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Project Header -->
+
+    <section class="hero">
+
+        <h1>
+            🧮 Python Calculator
+        </h1>
+
+        <p>
+            One of my first programming projects.
+        </p>
+
+    </section>
+
+
+    <!-- About -->
+
+    <section class="card">
+
+        <h2>
+            About This Project
+        </h2>
+
+        <p>
+            I built this calculator while learning Python.
+            The project helped me understand how programs
+            receive input, process information, make decisions,
+            and display results.
+        </p>
+
+        <p>
+            The calculator can perform basic arithmetic
+            operations such as addition, subtraction,
+            multiplication, and division.
+        </p>
+
+    </section>
+
+
+    <!-- Technologies -->
+
+    <section class="card">
+
+        <h2>
+            Technologies Used
+        </h2>
+
+
+        <div class="skills-container">
+
+            <span class="skill">
+                Python
+            </span>
+
+            <span class="skill">
+                HTML
+            </span>
+
+            <span class="skill">
+                CSS
+            </span>
+
+            <span class="skill">
+                JavaScript
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- What I Learned -->
+
+    <section class="card">
+
+        <h2>
+            What I Learned
+        </h2>
+
+
+        <div class="learning-item">
+
+            <h3>
+                Variables
+            </h3>
+
+            <p>
+                I learned how variables store information
+                that a program can use.
+            </p>
+
+        </div>
+
+
+        <div class="learning-item">
+
+            <h3>
+                User Input
+            </h3>
+
+            <p>
+                I learned how a program can ask the user
+                for numbers and operations.
+            </p>
+
+        </div>
+
+
+        <div class="learning-item">
+
+            <h3>
+                Conditions
+            </h3>
+
+            <p>
+                I learned how if and elif statements allow
+                a program to make decisions.
+            </p>
+
+        </div>
+
+
+        <div class="learning-item">
+
+            <h3>
+                Loops
+            </h3>
+
+            <p>
+                I learned how loops allow a program to
+                repeat tasks without rewriting the same
+                code.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Try Calculator -->
+
+    <section class="card">
+
+        <h2>
+            Try My Calculator
+        </h2>
+
+        <p>
+            You can try the browser version of my calculator.
+        </p>
+
+
+        <a
+            class="button"
+            href="calculator.html"
+        >
+            Open Calculator
+        </a>
+
+    </section>
+
+
+    <!-- Python Source Code -->
+
+    <section class="card">
+
+        <h2>
+            💻 Python Source Code
+        </h2>
+
+        <p>
+            This is the Python code behind my calculator project.
+        </p>
+
+
+        <span class="code-label">
+            calculator.py
+        </span>
+
+
+        <div class="code-box">
+print("Python Calculator")
+print("Welcome, Ashok!")
+
+calculation_count = 0
+
+while True:
+
+    num1 = float(input("Enter first number: "))
+
+    operation = input(
+        "Enter operation (+, -, *, /): "
+    )
+
+    num2 = float(input("Enter second number: "))
+
+
+    if operation == "+":
+
+        result = num1 + num2
+
+
+    elif operation == "-":
+
+        result = num1 - num2
+
+
+    elif operation == "*":
+
+        result = num1 * num2
+
+
+    elif operation == "/":
+
+        if num2 == 0:
+
+            print("You cannot divide by zero.")
+
+            continue
+
+        else:
+
+            result = num1 / num2
+
+
+    else:
+
+        print("Invalid operation.")
+
+        continue
+
+
+    print("The answer is:", result)
+
+    calculation_count += 1
+
+    print(
+        "Calculations completed:",
+        calculation_count
+    )
+
+
+    again = input(
+        "Do you want to calculate again? (yes/no): "
+    ).strip().lower()
+
+
+    if again != "yes":
+
+        print("Goodbye, Ashok!")
+
+        break
+        </div>
+
+    </section>
+
+
+    <!-- Project Actions -->
+
+    <section class="card">
+
+        <h2>
+            Project Links
+        </h2>
+
+        <div class="project-actions">
+
+            <a
+                class="button"
+                href="calculator.html"
+            >
+                🧮 Try Calculator
+            </a>
+
+
+            <a
+                class="button"
+                href="../index.html#projects"
+            >
+                📁 More Projects
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Ashok. Built with HTML and CSS.
+        </p>
+
+        <p>
+            My goal: Become a Programmer 🚀
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+```

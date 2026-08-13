@@ -1,0 +1,505 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ashok's Portfolio</title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="nav-container">
+
+            <div class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="#skills">
+                    Skills
+                </a>
+
+                <a href="#learning">
+                    Learning
+                </a>
+
+                <a href="#projects">
+                    Projects
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <button
+                id="themeButton"
+                class="theme-button"
+                type="button"
+            >
+                🌙 Dark Mode
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <img
+            src="profile.jpg"
+            alt="Ashok"
+        >
+
+        <h1>
+            Hi, I'm Ashok 👋
+        </h1>
+
+        <p>
+            I am learning Python and becoming a programmer.
+        </p>
+
+        <a
+            class="button"
+            href="#projects"
+        >
+            View My Projects
+        </a>
+
+    </section>
+
+
+    <!-- About -->
+
+    <section class="card">
+
+        <h2 id="about">
+            About Me
+        </h2>
+
+        <p>
+            Welcome to my personal portfolio website.
+            I am learning Python, HTML, and CSS while
+            building projects to improve my programming skills.
+        </p>
+
+        <a
+            class="button"
+            href="about.html"
+        >
+            Learn More About Me
+        </a>
+
+    </section>
+
+
+    <!-- Skills -->
+
+    <section class="card">
+
+        <h2 id="skills">
+            My Skills
+        </h2>
+
+        <p>
+            These are the technologies I am currently learning:
+        </p>
+
+
+        <div class="skills-container">
+
+            <span class="skill">
+                Python
+            </span>
+
+            <span class="skill">
+                HTML
+            </span>
+
+            <span class="skill">
+                CSS
+            </span>
+
+            <span class="skill">
+                JavaScript
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- Learning Journey -->
+
+    <section class="card">
+
+        <h2 id="learning">
+            My Learning Journey
+        </h2>
+
+        <p>
+            I am learning programming step by step.
+            Each project helps me understand new concepts
+            and improve my skills.
+        </p>
+
+
+        <div class="learning-item">
+
+            <h3>
+                🐍 Python
+            </h3>
+
+            <p>
+                Learning programming fundamentals,
+                variables, conditions, loops, functions,
+                and building small programs.
+            </p>
+
+        </div>
+
+
+        <div class="learning-item">
+
+            <h3>
+                🌐 HTML
+            </h3>
+
+            <p>
+                Learning how to structure websites using
+                pages, headings, links, images, forms,
+                and other HTML elements.
+            </p>
+
+        </div>
+
+
+        <div class="learning-item">
+
+            <h3>
+                🎨 CSS
+            </h3>
+
+            <p>
+                Learning how to style websites with layouts,
+                colors, spacing, buttons, cards, and
+                responsive designs.
+            </p>
+
+        </div>
+
+
+        <div class="learning-item">
+
+            <h3>
+                ⚡ JavaScript
+            </h3>
+
+            <p>
+                Beginning to learn how JavaScript can make
+                websites interactive and dynamic.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Projects -->
+
+    <section class="card">
+
+        <h2 id="projects">
+            My Projects
+        </h2>
+
+        <p>
+            Here are some of the projects I have built while learning.
+        </p>
+
+
+        <div class="projects-container">
+
+
+            <!-- Python Calculator -->
+
+            <div class="project">
+
+                <h3>
+                    🧮 Python Calculator
+                </h3>
+
+                <p>
+                    A calculator project I built while learning Python.
+                    It performs addition, subtraction, multiplication,
+                    and division.
+                </p>
+
+                <p>
+                    <strong>
+                        Technology:
+                    </strong>
+
+                    Python
+                </p>
+
+
+                <a
+                    class="button"
+                    href="python-calculator/project.html"
+                >
+                    View Project
+                </a>
+
+            </div>
+
+
+            <!-- Personal Portfolio -->
+
+            <div class="project">
+
+                <h3>
+                    🌐 Personal Portfolio
+                </h3>
+
+                <p>
+                    This website is my personal portfolio.
+                    I built it while learning HTML and CSS.
+                </p>
+
+                <p>
+                    <strong>
+                        Technology:
+                    </strong>
+
+                    HTML + CSS
+                </p>
+
+
+                <a
+                    class="button"
+                    href="about.html"
+                >
+                    Learn More
+                </a>
+
+            </div>
+
+
+            <!-- Future Project -->
+
+            <div class="project">
+
+                <h3>
+                    🚀 Future Project
+                </h3>
+
+                <p>
+                    This space is reserved for the next project
+                    I build while learning programming.
+                </p>
+
+                <p>
+                    <strong>
+                        Status:
+                    </strong>
+
+                    Coming Soon
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Contact -->
+
+    <section
+        class="card"
+        id="contact"
+    >
+
+        <h2>
+            Contact Me
+        </h2>
+
+        <p>
+            Send me a message using the form below.
+        </p>
+
+
+        <form
+            action="https://formspree.io/f/xnpazaan"
+            method="POST"
+        >
+
+            <label for="name">
+                Your Name
+            </label>
+
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label for="email">
+                Your Email
+            </label>
+
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label for="message">
+                Your Message
+            </label>
+
+
+            <textarea
+                id="message"
+                name="message"
+                placeholder="Write your message..."
+                rows="6"
+                required
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="button"
+            >
+                Send Message
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Ashok. Built with HTML and CSS.
+        </p>
+
+        <p>
+            My goal: Become a Programmer 🚀
+        </p>
+
+    </footer>
+
+
+    <!-- Dark Mode -->
+
+    <script>
+
+        const themeButton =
+            document.getElementById("themeButton");
+
+
+        const savedTheme =
+            localStorage.getItem("theme");
+
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add(
+                "dark-mode"
+            );
+
+            themeButton.textContent =
+                "☀️ Light Mode";
+
+        }
+
+
+        themeButton.addEventListener(
+            "click",
+            function () {
+
+                document.body.classList.toggle(
+                    "dark-mode"
+                );
+
+
+                if (
+                    document.body.classList.contains(
+                        "dark-mode"
+                    )
+                ) {
+
+                    localStorage.setItem(
+                        "theme",
+                        "dark"
+                    );
+
+                    themeButton.textContent =
+                        "☀️ Light Mode";
+
+                } else {
+
+                    localStorage.setItem(
+                        "theme",
+                        "light"
+                    );
+
+                    themeButton.textContent =
+                        "🌙 Dark Mode";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+```
