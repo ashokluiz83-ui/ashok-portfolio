@@ -15,7 +15,24 @@ sys.path.insert(
 from calculations import (
     calculate_average,
     get_grade,
+    calculate_class_statistics,
 )
+
+
+class FakeStudent:
+
+    def __init__(
+        self,
+        name,
+        marks
+    ):
+
+        self.name = name
+        self.marks = marks
+
+    def calculate_average(self):
+
+        return sum(self.marks) / len(self.marks)
 
 
 class TestCalculations(unittest.TestCase):
@@ -74,6 +91,115 @@ class TestCalculations(unittest.TestCase):
         self.assertEqual(
             result,
             "F"
+        )
+
+    def test_class_statistics(self):
+
+        students = [
+
+            FakeStudent(
+                "Ashok",
+                [80, 90, 85]
+            ),
+
+            FakeStudent(
+                "John",
+                [60, 70, 65]
+            ),
+
+            FakeStudent(
+                "Mary",
+                [40, 50, 45]
+            ),
+        ]
+
+        result = calculate_class_statistics(
+            students
+        )
+
+        self.assertEqual(
+            result["student_count"],
+            3
+        )
+
+        self.assertEqual(
+            result["class_average"],
+            65
+        )
+
+        self.assertEqual(
+            result["highest_average"],
+            85
+        )
+
+        self.assertEqual(
+            result["lowest_average"],
+            45
+        )
+
+        self.assertEqual(
+            result["passing_students"],
+            2
+        )
+
+        self.assertEqual(
+            result["failing_students"],
+            1
+        )
+
+    def test_pass_percentage(self):
+
+        students = [
+
+            FakeStudent(
+                "Ashok",
+                [80, 80, 80]
+            ),
+
+            FakeStudent(
+                "John",
+                [40, 40, 40]
+            ),
+        ]
+
+        result = calculate_class_statistics(
+            students
+        )
+
+        self.assertEqual(
+            result["pass_percentage"],
+            50
+        )
+
+        self.assertEqual(
+            result["fail_percentage"],
+            50
+        )
+
+    def test_empty_class(self):
+
+        result = calculate_class_statistics(
+            []
+        )
+
+        self.assertEqual(
+            result["student_count"],
+            0
+        )
+
+        self.assertEqual(
+            result["class_average"],
+            0
+        )
+
+        self.assertEqual(
+            result["passing_students"],
+            0
+        )
+
+        self.assertEqual(
+            result["failing_students"],
+            0
         )
 
 
