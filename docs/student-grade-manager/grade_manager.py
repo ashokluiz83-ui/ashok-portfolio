@@ -18,7 +18,6 @@ def add_student():
         print("Student name cannot be empty.")
         return
 
-    # Check for duplicate student names
     for student in students:
 
         if student.name.lower() == name.lower():
@@ -192,6 +191,112 @@ def remove_student():
     print("Student not found.")
 
 
+def edit_student():
+
+    print("\n--- Edit Student ---")
+
+    if len(students) == 0:
+
+        print(
+            "No students have been added yet."
+        )
+
+        return
+
+    search_name = input(
+        "Enter the student's name to edit: "
+    ).strip().lower()
+
+    for student in students:
+
+        if (
+            student.name.lower()
+            == search_name
+        ):
+
+            print("\nCurrent student information:")
+
+            student.show_info()
+
+            print(
+                "\nEnter the new marks."
+            )
+
+            new_marks = []
+
+            while True:
+
+                try:
+
+                    subject_count = int(
+                        input(
+                            "How many subjects? "
+                        )
+                    )
+
+                    if subject_count > 0:
+                        break
+
+                    print(
+                        "Enter at least 1 subject."
+                    )
+
+                except ValueError:
+
+                    print(
+                        "Please enter a whole number."
+                    )
+
+            for subject in range(
+                1,
+                subject_count + 1
+            ):
+
+                while True:
+
+                    try:
+
+                        mark = float(
+                            input(
+                                f"Enter mark for "
+                                f"subject {subject} "
+                                f"(0-100): "
+                            )
+                        )
+
+                        if 0 <= mark <= 100:
+
+                            new_marks.append(mark)
+
+                            break
+
+                        print(
+                            "Please enter a mark "
+                            "between 0 and 100."
+                        )
+
+                    except ValueError:
+
+                        print(
+                            "Please enter a "
+                            "valid number."
+                        )
+
+            student.marks = new_marks
+
+            save_students(students)
+
+            print(
+                "\nStudent updated successfully!"
+            )
+
+            student.show_info()
+
+            return
+
+    print("Student not found.")
+
+
 def show_top_student():
 
     print("\n--- Top Student ---")
@@ -237,9 +342,11 @@ def show_menu():
 
     print("4. Remove a student")
 
-    print("5. Show top student")
+    print("5. Edit student")
 
-    print("6. Exit")
+    print("6. Show top student")
+
+    print("7. Exit")
 
     print(
         "=============================="
@@ -251,7 +358,7 @@ while True:
     show_menu()
 
     choice = input(
-        "Choose an option (1-6): "
+        "Choose an option (1-7): "
     ).strip()
 
     if choice == "1":
@@ -272,9 +379,13 @@ while True:
 
     elif choice == "5":
 
-        show_top_student()
+        edit_student()
 
     elif choice == "6":
+
+        show_top_student()
+
+    elif choice == "7":
 
         print("\nGoodbye, Ashok!")
 
@@ -284,5 +395,5 @@ while True:
 
         print(
             "\nInvalid choice."
-            " Please choose 1, 2, 3, 4, 5, or 6."
+            " Please choose 1, 2, 3, 4, 5, 6, or 7."
         )
