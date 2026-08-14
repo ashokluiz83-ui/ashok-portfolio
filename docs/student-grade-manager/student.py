@@ -1,17 +1,17 @@
 
 class Student:
 
-    def __init__(self, name, marks):
+    def __init__(self, student_id, name, marks):
+
+        self.student_id = student_id
 
         self.name = name
 
         self.marks = marks
 
-
     def calculate_average(self):
 
         return sum(self.marks) / len(self.marks)
-
 
     def get_grade(self):
 
@@ -32,12 +32,22 @@ class Student:
         else:
             return "F"
 
-
     def show_info(self):
 
-        print("\nName:", self.name)
+        print(
+            "\nID:",
+            self.student_id
+        )
 
-        print("Marks:", self.marks)
+        print(
+            "Name:",
+            self.name
+        )
+
+        print(
+            "Marks:",
+            self.marks
+        )
 
         print(
             "Average:",

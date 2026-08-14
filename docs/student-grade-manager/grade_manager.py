@@ -6,6 +6,18 @@ from storage import load_students, save_students
 students = load_students()
 
 
+def get_next_student_id():
+
+    if len(students) == 0:
+
+        return 1001
+
+    return max(
+        student.student_id
+        for student in students
+    ) + 1
+
+
 def add_student():
 
     print("\n--- Add Student ---")
@@ -15,7 +27,11 @@ def add_student():
     ).strip()
 
     if name == "":
-        print("Student name cannot be empty.")
+
+        print(
+            "Student name cannot be empty."
+        )
+
         return
 
     for student in students:
@@ -37,9 +53,12 @@ def add_student():
             )
 
             if subject_count > 0:
+
                 break
 
-            print("Enter at least 1 subject.")
+            print(
+                "Enter at least 1 subject."
+            )
 
         except ValueError:
 
@@ -82,7 +101,10 @@ def add_student():
                     "Please enter a valid number."
                 )
 
+    student_id = get_next_student_id()
+
     student = Student(
+        student_id,
         name,
         marks
     )
@@ -122,6 +144,17 @@ def show_students():
         student.show_info()
 
 
+def find_student_by_id(student_id):
+
+    for student in students:
+
+        if student.student_id == student_id:
+
+            return student
+
+    return None
+
+
 def search_student():
 
     print("\n--- Search Student ---")
@@ -134,22 +167,35 @@ def search_student():
 
         return
 
-    search_name = input(
-        "Enter the student's name: "
-    ).strip().lower()
+    while True:
 
-    for student in students:
+        try:
 
-        if (
-            student.name.lower()
-            == search_name
-        ):
+            student_id = int(
+                input(
+                    "Enter student ID: "
+                )
+            )
 
-            print("\nStudent found!")
+            break
 
-            student.show_info()
+        except ValueError:
 
-            return
+            print(
+                "Please enter a valid student ID."
+            )
+
+    student = find_student_by_id(
+        student_id
+    )
+
+    if student is not None:
+
+        print("\nStudent found!")
+
+        student.show_info()
+
+        return
 
     print("Student not found.")
 
@@ -166,29 +212,42 @@ def remove_student():
 
         return
 
-    remove_name = input(
-        "Enter the student's name to remove: "
-    ).strip().lower()
+    while True:
 
-    for student in students:
+        try:
 
-        if (
-            student.name.lower()
-            == remove_name
-        ):
-
-            students.remove(student)
-
-            save_students(students)
-
-            print(
-                f"{student.name} "
-                "has been removed successfully."
+            student_id = int(
+                input(
+                    "Enter student ID to remove: "
+                )
             )
 
-            return
+            break
 
-    print("Student not found.")
+        except ValueError:
+
+            print(
+                "Please enter a valid student ID."
+            )
+
+    student = find_student_by_id(
+        student_id
+    )
+
+    if student is None:
+
+        print("Student not found.")
+
+        return
+
+    students.remove(student)
+
+    save_students(students)
+
+    print(
+        f"{student.name} "
+        "has been removed successfully."
+    )
 
 
 def edit_student():
@@ -203,98 +262,114 @@ def edit_student():
 
         return
 
-    search_name = input(
-        "Enter the student's name to edit: "
-    ).strip().lower()
+    while True:
 
-    for student in students:
+        try:
 
-        if (
-            student.name.lower()
-            == search_name
-        ):
-
-            print("\nCurrent student information:")
-
-            student.show_info()
-
-            print(
-                "\nEnter the new marks."
+            student_id = int(
+                input(
+                    "Enter student ID to edit: "
+                )
             )
 
-            new_marks = []
+            break
 
-            while True:
-
-                try:
-
-                    subject_count = int(
-                        input(
-                            "How many subjects? "
-                        )
-                    )
-
-                    if subject_count > 0:
-                        break
-
-                    print(
-                        "Enter at least 1 subject."
-                    )
-
-                except ValueError:
-
-                    print(
-                        "Please enter a whole number."
-                    )
-
-            for subject in range(
-                1,
-                subject_count + 1
-            ):
-
-                while True:
-
-                    try:
-
-                        mark = float(
-                            input(
-                                f"Enter mark for "
-                                f"subject {subject} "
-                                f"(0-100): "
-                            )
-                        )
-
-                        if 0 <= mark <= 100:
-
-                            new_marks.append(mark)
-
-                            break
-
-                        print(
-                            "Please enter a mark "
-                            "between 0 and 100."
-                        )
-
-                    except ValueError:
-
-                        print(
-                            "Please enter a "
-                            "valid number."
-                        )
-
-            student.marks = new_marks
-
-            save_students(students)
+        except ValueError:
 
             print(
-                "\nStudent updated successfully!"
+                "Please enter a valid student ID."
             )
 
-            student.show_info()
+    student = find_student_by_id(
+        student_id
+    )
 
-            return
+    if student is None:
 
-    print("Student not found.")
+        print("Student not found.")
+
+        return
+
+    print(
+        "\nCurrent student information:"
+    )
+
+    student.show_info()
+
+    print(
+        "\nEnter the new marks."
+    )
+
+    new_marks = []
+
+    while True:
+
+        try:
+
+            subject_count = int(
+                input(
+                    "How many subjects? "
+                )
+            )
+
+            if subject_count > 0:
+
+                break
+
+            print(
+                "Enter at least 1 subject."
+            )
+
+        except ValueError:
+
+            print(
+                "Please enter a whole number."
+            )
+
+    for subject in range(
+        1,
+        subject_count + 1
+    ):
+
+        while True:
+
+            try:
+
+                mark = float(
+                    input(
+                        f"Enter mark for "
+                        f"subject {subject} "
+                        f"(0-100): "
+                    )
+                )
+
+                if 0 <= mark <= 100:
+
+                    new_marks.append(mark)
+
+                    break
+
+                print(
+                    "Please enter a mark "
+                    "between 0 and 100."
+                )
+
+            except ValueError:
+
+                print(
+                    "Please enter a "
+                    "valid number."
+                )
+
+    student.marks = new_marks
+
+    save_students(students)
+
+    print(
+        "\nStudent updated successfully!"
+    )
+
+    student.show_info()
 
 
 def show_top_student():
@@ -387,7 +462,9 @@ while True:
 
     elif choice == "7":
 
-        print("\nGoodbye, Ashok!")
+        print(
+            "\nGoodbye, Ashok!"
+        )
 
         break
 

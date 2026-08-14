@@ -17,14 +17,26 @@ def load_students():
 
         students = []
 
+        next_id = 1001
+
         for item in data:
 
+            student_id = item.get(
+                "student_id",
+                next_id
+            )
+
             student = Student(
+                student_id,
                 item["name"],
                 item["marks"]
             )
 
             students.append(student)
+
+            if student_id >= next_id:
+
+                next_id = student_id + 1
 
         return students
 
@@ -49,6 +61,7 @@ def save_students(students):
 
         data.append(
             {
+                "student_id": student.student_id,
                 "name": student.name,
                 "marks": student.marks
             }
