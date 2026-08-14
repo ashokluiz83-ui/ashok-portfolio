@@ -1,6 +1,7 @@
 
 from student import Student
 from storage import load_students, save_students
+from calculations import calculate_class_statistics
 
 
 students = load_students()
@@ -399,59 +400,17 @@ def show_statistics():
 
     print("\n--- Class Statistics ---")
 
-    if len(students) == 0:
+    statistics = calculate_class_statistics(
+        students
+    )
+
+    if statistics["student_count"] == 0:
 
         print(
             "No students have been added yet."
         )
 
         return
-
-    averages = []
-
-    for student in students:
-
-        averages.append(
-            student.calculate_average()
-        )
-
-    student_count = len(students)
-
-    class_average = sum(
-        averages
-    ) / student_count
-
-    highest_average = max(
-        averages
-    )
-
-    lowest_average = min(
-        averages
-    )
-
-    passing_students = 0
-
-    failing_students = 0
-
-    for student in students:
-
-        if student.calculate_average() >= 50:
-
-            passing_students += 1
-
-        else:
-
-            failing_students += 1
-
-    pass_percentage = (
-        passing_students
-        / student_count
-    ) * 100
-
-    fail_percentage = (
-        failing_students
-        / student_count
-    ) * 100
 
     print(
         "\n=============================="
@@ -467,43 +426,58 @@ def show_statistics():
 
     print(
         "Number of students:",
-        student_count
+        statistics["student_count"]
     )
 
     print(
         "Class average:",
-        round(class_average, 2)
+        round(
+            statistics["class_average"],
+            2
+        )
     )
 
     print(
         "Highest average:",
-        round(highest_average, 2)
+        round(
+            statistics["highest_average"],
+            2
+        )
     )
 
     print(
         "Lowest average:",
-        round(lowest_average, 2)
+        round(
+            statistics["lowest_average"],
+            2
+        )
     )
 
     print(
         "Passing students:",
-        passing_students
+        statistics["passing_students"]
     )
 
     print(
         "Failing students:",
-        failing_students
+        statistics["failing_students"]
     )
 
     print(
         "Pass percentage:",
-        round(pass_percentage, 2),
+        round(
+            statistics["pass_percentage"],
+            2
+        ),
         "%"
     )
 
     print(
         "Fail percentage:",
-        round(fail_percentage, 2),
+        round(
+            statistics["fail_percentage"],
+            2
+        ),
         "%"
     )
 
