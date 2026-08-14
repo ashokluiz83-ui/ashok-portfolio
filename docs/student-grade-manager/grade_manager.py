@@ -395,6 +395,123 @@ def show_top_student():
     top_student.show_info()
 
 
+def show_statistics():
+
+    print("\n--- Class Statistics ---")
+
+    if len(students) == 0:
+
+        print(
+            "No students have been added yet."
+        )
+
+        return
+
+    averages = []
+
+    for student in students:
+
+        averages.append(
+            student.calculate_average()
+        )
+
+    student_count = len(students)
+
+    class_average = sum(
+        averages
+    ) / student_count
+
+    highest_average = max(
+        averages
+    )
+
+    lowest_average = min(
+        averages
+    )
+
+    passing_students = 0
+
+    failing_students = 0
+
+    for student in students:
+
+        if student.calculate_average() >= 50:
+
+            passing_students += 1
+
+        else:
+
+            failing_students += 1
+
+    pass_percentage = (
+        passing_students
+        / student_count
+    ) * 100
+
+    fail_percentage = (
+        failing_students
+        / student_count
+    ) * 100
+
+    print(
+        "\n=============================="
+    )
+
+    print(
+        "       CLASS STATISTICS"
+    )
+
+    print(
+        "=============================="
+    )
+
+    print(
+        "Number of students:",
+        student_count
+    )
+
+    print(
+        "Class average:",
+        round(class_average, 2)
+    )
+
+    print(
+        "Highest average:",
+        round(highest_average, 2)
+    )
+
+    print(
+        "Lowest average:",
+        round(lowest_average, 2)
+    )
+
+    print(
+        "Passing students:",
+        passing_students
+    )
+
+    print(
+        "Failing students:",
+        failing_students
+    )
+
+    print(
+        "Pass percentage:",
+        round(pass_percentage, 2),
+        "%"
+    )
+
+    print(
+        "Fail percentage:",
+        round(fail_percentage, 2),
+        "%"
+    )
+
+    print(
+        "=============================="
+    )
+
+
 def show_menu():
 
     print(
@@ -421,7 +538,9 @@ def show_menu():
 
     print("6. Show top student")
 
-    print("7. Exit")
+    print("7. Show class statistics")
+
+    print("8. Exit")
 
     print(
         "=============================="
@@ -433,7 +552,7 @@ while True:
     show_menu()
 
     choice = input(
-        "Choose an option (1-7): "
+        "Choose an option (1-8): "
     ).strip()
 
     if choice == "1":
@@ -462,6 +581,10 @@ while True:
 
     elif choice == "7":
 
+        show_statistics()
+
+    elif choice == "8":
+
         print(
             "\nGoodbye, Ashok!"
         )
@@ -472,5 +595,5 @@ while True:
 
         print(
             "\nInvalid choice."
-            " Please choose 1, 2, 3, 4, 5, 6, or 7."
+            " Please choose 1, 2, 3, 4, 5, 6, 7, or 8."
         )
