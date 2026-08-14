@@ -486,6 +486,83 @@ def show_statistics():
     )
 
 
+def sort_students():
+
+    print("\n--- Sort Students ---")
+
+    if len(students) == 0:
+
+        print(
+            "No students have been added yet."
+        )
+
+        return
+
+    print(
+        "\n1. Sort by name"
+    )
+
+    print(
+        "2. Sort by average - highest first"
+    )
+
+    print(
+        "3. Sort by average - lowest first"
+    )
+
+    choice = input(
+        "\nChoose a sorting option (1-3): "
+    ).strip()
+
+    if choice == "1":
+
+        sorted_students = sorted(
+            students,
+            key=lambda student:
+            student.name.lower()
+        )
+
+    elif choice == "2":
+
+        sorted_students = sorted(
+            students,
+            key=lambda student:
+            student.calculate_average(),
+            reverse=True
+        )
+
+    elif choice == "3":
+
+        sorted_students = sorted(
+            students,
+            key=lambda student:
+            student.calculate_average()
+        )
+
+    else:
+
+        print(
+            "Invalid sorting option."
+        )
+
+        return
+
+    print(
+        "\n--- Sorted Students ---"
+    )
+
+    for number, student in enumerate(
+        sorted_students,
+        start=1
+    ):
+
+        print(
+            f"\nStudent {number}"
+        )
+
+        student.show_info()
+
+
 def show_menu():
 
     print(
@@ -514,7 +591,9 @@ def show_menu():
 
     print("7. Show class statistics")
 
-    print("8. Exit")
+    print("8. Sort students")
+
+    print("9. Exit")
 
     print(
         "=============================="
@@ -526,7 +605,7 @@ while True:
     show_menu()
 
     choice = input(
-        "Choose an option (1-8): "
+        "Choose an option (1-9): "
     ).strip()
 
     if choice == "1":
@@ -559,6 +638,10 @@ while True:
 
     elif choice == "8":
 
+        sort_students()
+
+    elif choice == "9":
+
         print(
             "\nGoodbye, Ashok!"
         )
@@ -569,5 +652,5 @@ while True:
 
         print(
             "\nInvalid choice."
-            " Please choose 1, 2, 3, 4, 5, 6, 7, or 8."
+            " Please choose a number from 1 to 9."
         )
