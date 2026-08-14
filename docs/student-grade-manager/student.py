@@ -1,15 +1,15 @@
-
 class Student:
 
     def __init__(self, student_id, name, marks):
 
         self.student_id = student_id
-
         self.name = name
-
         self.marks = marks
 
     def calculate_average(self):
+
+        if len(self.marks) == 0:
+            return 0
 
         return sum(self.marks) / len(self.marks)
 
@@ -34,20 +34,11 @@ class Student:
 
     def show_info(self):
 
-        print(
-            "\nID:",
-            self.student_id
-        )
+        print("\nID:", self.student_id)
 
-        print(
-            "Name:",
-            self.name
-        )
+        print("Name:", self.name)
 
-        print(
-            "Marks:",
-            self.marks
-        )
+        print("Marks:", self.marks)
 
         print(
             "Average:",
@@ -57,7 +48,4 @@ class Student:
             )
         )
 
-        print(
-            "Grade:",
-            self.get_grade()
-        )
+        print("Grade:", self.get_grade())

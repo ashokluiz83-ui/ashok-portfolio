@@ -1,5 +1,7 @@
-
 def calculate_average(marks):
+
+    if len(marks) == 0:
+        return 0
 
     return sum(marks) / len(marks)
 
@@ -52,26 +54,19 @@ def calculate_class_statistics(students):
         / student_count
     )
 
-    highest_average = max(
-        averages
-    )
+    highest_average = max(averages)
 
-    lowest_average = min(
-        averages
-    )
+    lowest_average = min(averages)
 
     passing_students = 0
-
     failing_students = 0
 
     for student in students:
 
         if student.calculate_average() >= 50:
-
             passing_students += 1
 
         else:
-
             failing_students += 1
 
     pass_percentage = (

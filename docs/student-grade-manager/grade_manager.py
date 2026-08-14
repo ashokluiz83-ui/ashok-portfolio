@@ -1,4 +1,3 @@
-
 from student import Student
 from storage import load_students, save_students
 from calculations import calculate_class_statistics
@@ -10,6 +9,7 @@ students = load_students()
 def get_next_student_id():
 
     if len(students) == 0:
+
         return 1001
 
     return max(
@@ -27,7 +27,11 @@ def add_student():
     ).strip()
 
     if name == "":
-        print("Student name cannot be empty.")
+
+        print(
+            "Student name cannot be empty."
+        )
+
         return
 
     for student in students:
@@ -51,7 +55,9 @@ def add_student():
             if subject_count > 0:
                 break
 
-            print("Enter at least 1 subject.")
+            print(
+                "Enter at least 1 subject."
+            )
 
         except ValueError:
 
@@ -142,6 +148,7 @@ def find_student_by_id(student_id):
     for student in students:
 
         if student.student_id == student_id:
+
             return student
 
     return None
@@ -730,61 +737,68 @@ def show_menu():
     )
 
 
-while True:
+def main():
 
-    show_menu()
+    while True:
 
-    choice = input(
-        "Choose an option (1-10): "
-    ).strip()
+        show_menu()
 
-    if choice == "1":
+        choice = input(
+            "Choose an option (1-10): "
+        ).strip()
 
-        add_student()
+        if choice == "1":
 
-    elif choice == "2":
+            add_student()
 
-        show_students()
+        elif choice == "2":
 
-    elif choice == "3":
+            show_students()
 
-        search_student()
+        elif choice == "3":
 
-    elif choice == "4":
+            search_student()
 
-        remove_student()
+        elif choice == "4":
 
-    elif choice == "5":
+            remove_student()
 
-        edit_student()
+        elif choice == "5":
 
-    elif choice == "6":
+            edit_student()
 
-        show_top_student()
+        elif choice == "6":
 
-    elif choice == "7":
+            show_top_student()
 
-        show_statistics()
+        elif choice == "7":
 
-    elif choice == "8":
+            show_statistics()
 
-        sort_students()
+        elif choice == "8":
 
-    elif choice == "9":
+            sort_students()
 
-        export_class_report()
+        elif choice == "9":
 
-    elif choice == "10":
+            export_class_report()
 
-        print(
-            "\nGoodbye, Ashok!"
-        )
+        elif choice == "10":
 
-        break
+            print(
+                "\nGoodbye, Ashok!"
+            )
 
-    else:
+            break
 
-        print(
-            "\nInvalid choice."
-            " Please choose a number from 1 to 10."
-        )
+        else:
+
+            print(
+                "\nInvalid choice."
+                " Please choose a number from 1 to 10."
+            )
+
+
+if __name__ == "__main__":
+
+    main()

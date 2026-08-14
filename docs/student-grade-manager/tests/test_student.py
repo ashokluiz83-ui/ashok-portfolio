@@ -1,4 +1,3 @@
-
 import sys
 from pathlib import Path
 import unittest
@@ -127,6 +126,24 @@ class TestStudent(unittest.TestCase):
 
         self.assertEqual(
             result,
+            "F"
+        )
+
+    def test_empty_marks(self):
+
+        student = Student(
+            1006,
+            "Empty",
+            []
+        )
+
+        self.assertEqual(
+            student.calculate_average(),
+            0
+        )
+
+        self.assertEqual(
+            student.get_grade(),
             "F"
         )
 

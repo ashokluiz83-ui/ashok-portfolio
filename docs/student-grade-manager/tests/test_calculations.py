@@ -1,4 +1,3 @@
-
 import sys
 from pathlib import Path
 import unittest
@@ -31,6 +30,9 @@ class FakeStudent:
         self.marks = marks
 
     def calculate_average(self):
+
+        if len(self.marks) == 0:
+            return 0
 
         return sum(self.marks) / len(self.marks)
 
