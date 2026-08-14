@@ -1,59 +1,8 @@
-import json
+from calculations import calculate_average, get_grade
+from storage import load_students, save_students
 
 
-FILE_NAME = "students.json"
-
-students = []
-
-
-def load_students():
-    global students
-
-    try:
-        with open(FILE_NAME, "r") as file:
-            students = json.load(file)
-
-        print(
-            f"Loaded {len(students)} student(s) from file."
-        )
-
-    except FileNotFoundError:
-        students = []
-
-    except json.JSONDecodeError:
-        print("The student data file is damaged.")
-        students = []
-
-
-def save_students():
-    with open(FILE_NAME, "w") as file:
-        json.dump(
-            students,
-            file,
-            indent=4
-        )
-
-
-def calculate_average(marks):
-    return sum(marks) / len(marks)
-
-
-def get_grade(average):
-
-    if average >= 80:
-        return "A"
-
-    elif average >= 70:
-        return "B"
-
-    elif average >= 60:
-        return "C"
-
-    elif average >= 50:
-        return "D"
-
-    else:
-        return "F"
+students = load_students()
 
 
 def add_student():
@@ -71,6 +20,7 @@ def add_student():
     while True:
 
         try:
+
             subject_count = int(
                 input("How many subjects? ")
             )
@@ -81,7 +31,10 @@ def add_student():
             print("Enter at least 1 subject.")
 
         except ValueError:
-            print("Please enter a whole number.")
+
+            print(
+                "Please enter a whole number."
+            )
 
     marks = []
 
@@ -104,6 +57,7 @@ def add_student():
                 if 0 <= mark <= 100:
 
                     marks.append(mark)
+
                     break
 
                 print(
@@ -130,7 +84,7 @@ def add_student():
 
     students.append(student)
 
-    save_students()
+    save_students(students)
 
     print("\nStudent added successfully!")
 
@@ -274,7 +228,7 @@ def remove_student():
 
             students.remove(student)
 
-            save_students()
+            save_students(students)
 
             print(
                 f"{student['name']} "
@@ -303,9 +257,7 @@ def show_top_student():
         key=lambda student: student["average"]
     )
 
-    print(
-        "\n🏆 Top Student"
-    )
+    print("\n🏆 Top Student")
 
     print(
         "Name:",
@@ -340,36 +292,21 @@ def show_menu():
         "=============================="
     )
 
-    print(
-        "1. Add student"
-    )
+    print("1. Add student")
 
-    print(
-        "2. Show all students"
-    )
+    print("2. Show all students")
 
-    print(
-        "3. Search for a student"
-    )
+    print("3. Search for a student")
 
-    print(
-        "4. Remove a student"
-    )
+    print("4. Remove a student")
 
-    print(
-        "5. Show top student"
-    )
+    print("5. Show top student")
 
-    print(
-        "6. Exit"
-    )
+    print("6. Exit")
 
     print(
         "=============================="
     )
-
-
-load_students()
 
 
 while True:
@@ -402,9 +339,7 @@ while True:
 
     elif choice == "6":
 
-        print(
-            "\nGoodbye, Ashok!"
-        )
+        print("\nGoodbye, Ashok!")
 
         break
 
