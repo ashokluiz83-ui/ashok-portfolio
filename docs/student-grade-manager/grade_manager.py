@@ -18,6 +18,17 @@ def add_student():
         print("Student name cannot be empty.")
         return
 
+    # Check for duplicate student names
+    for student in students:
+
+        if student.name.lower() == name.lower():
+
+            print(
+                "A student with that name already exists."
+            )
+
+            return
+
     while True:
 
         try:
