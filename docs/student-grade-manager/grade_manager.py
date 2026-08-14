@@ -10,7 +10,6 @@ students = load_students()
 def get_next_student_id():
 
     if len(students) == 0:
-
         return 1001
 
     return max(
@@ -28,11 +27,7 @@ def add_student():
     ).strip()
 
     if name == "":
-
-        print(
-            "Student name cannot be empty."
-        )
-
+        print("Student name cannot be empty.")
         return
 
     for student in students:
@@ -54,12 +49,9 @@ def add_student():
             )
 
             if subject_count > 0:
-
                 break
 
-            print(
-                "Enter at least 1 subject."
-            )
+            print("Enter at least 1 subject.")
 
         except ValueError:
 
@@ -150,7 +142,6 @@ def find_student_by_id(student_id):
     for student in students:
 
         if student.student_id == student_id:
-
             return student
 
     return None
@@ -314,7 +305,6 @@ def edit_student():
             )
 
             if subject_count > 0:
-
                 break
 
             print(
@@ -358,8 +348,7 @@ def edit_student():
             except ValueError:
 
                 print(
-                    "Please enter a "
-                    "valid number."
+                    "Please enter a valid number."
                 )
 
     student.marks = new_marks
@@ -498,9 +487,7 @@ def sort_students():
 
         return
 
-    print(
-        "\n1. Sort by name"
-    )
+    print("\n1. Sort by name")
 
     print(
         "2. Sort by average - highest first"
@@ -563,6 +550,147 @@ def sort_students():
         student.show_info()
 
 
+def export_class_report():
+
+    print("\n--- Export Class Report ---")
+
+    if len(students) == 0:
+
+        print(
+            "No students have been added yet."
+        )
+
+        return
+
+    statistics = calculate_class_statistics(
+        students
+    )
+
+    try:
+
+        with open(
+            "class_report.txt",
+            "w"
+        ) as file:
+
+            file.write(
+                "================================\n"
+            )
+
+            file.write(
+                "       STUDENT GRADE REPORT\n"
+            )
+
+            file.write(
+                "================================\n\n"
+            )
+
+            file.write(
+                "ALL STUDENTS\n"
+            )
+
+            file.write(
+                "--------------------------------\n"
+            )
+
+            for student in students:
+
+                file.write(
+                    f"ID: {student.student_id}\n"
+                )
+
+                file.write(
+                    f"Name: {student.name}\n"
+                )
+
+                file.write(
+                    f"Marks: {student.marks}\n"
+                )
+
+                file.write(
+                    "Average: "
+                    f"{student.calculate_average():.2f}\n"
+                )
+
+                file.write(
+                    f"Grade: {student.get_grade()}\n"
+                )
+
+                file.write(
+                    "--------------------------------\n"
+                )
+
+            file.write(
+                "\nCLASS STATISTICS\n"
+            )
+
+            file.write(
+                "--------------------------------\n"
+            )
+
+            file.write(
+                "Number of students: "
+                f"{statistics['student_count']}\n"
+            )
+
+            file.write(
+                "Class average: "
+                f"{statistics['class_average']:.2f}\n"
+            )
+
+            file.write(
+                "Highest average: "
+                f"{statistics['highest_average']:.2f}\n"
+            )
+
+            file.write(
+                "Lowest average: "
+                f"{statistics['lowest_average']:.2f}\n"
+            )
+
+            file.write(
+                "Passing students: "
+                f"{statistics['passing_students']}\n"
+            )
+
+            file.write(
+                "Failing students: "
+                f"{statistics['failing_students']}\n"
+            )
+
+            file.write(
+                "Pass percentage: "
+                f"{statistics['pass_percentage']:.2f}%\n"
+            )
+
+            file.write(
+                "Fail percentage: "
+                f"{statistics['fail_percentage']:.2f}%\n"
+            )
+
+            file.write(
+                "\n================================\n"
+            )
+
+        print(
+            "\nClass report exported successfully!"
+        )
+
+        print(
+            "File created: class_report.txt"
+        )
+
+    except OSError as error:
+
+        print(
+            "\nCould not create the report."
+        )
+
+        print(
+            f"Error: {error}"
+        )
+
+
 def show_menu():
 
     print(
@@ -593,7 +721,9 @@ def show_menu():
 
     print("8. Sort students")
 
-    print("9. Exit")
+    print("9. Export class report")
+
+    print("10. Exit")
 
     print(
         "=============================="
@@ -605,7 +735,7 @@ while True:
     show_menu()
 
     choice = input(
-        "Choose an option (1-9): "
+        "Choose an option (1-10): "
     ).strip()
 
     if choice == "1":
@@ -642,6 +772,10 @@ while True:
 
     elif choice == "9":
 
+        export_class_report()
+
+    elif choice == "10":
+
         print(
             "\nGoodbye, Ashok!"
         )
@@ -652,5 +786,5 @@ while True:
 
         print(
             "\nInvalid choice."
-            " Please choose a number from 1 to 9."
+            " Please choose a number from 1 to 10."
         )
