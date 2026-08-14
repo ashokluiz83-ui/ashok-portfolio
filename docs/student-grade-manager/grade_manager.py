@@ -1,4 +1,5 @@
-from calculations import calculate_average, get_grade
+
+from student import Student
 from storage import load_students, save_students
 
 
@@ -71,31 +72,20 @@ def add_student():
                     "Please enter a valid number."
                 )
 
-    average = calculate_average(marks)
-
-    grade = get_grade(average)
-
-    student = {
-        "name": name,
-        "marks": marks,
-        "average": average,
-        "grade": grade
-    }
+    student = Student(
+        name,
+        marks
+    )
 
     students.append(student)
 
     save_students(students)
 
-    print("\nStudent added successfully!")
-
-    print("Name:", name)
-
     print(
-        "Average:",
-        round(average, 2)
+        "\nStudent added successfully!"
     )
 
-    print("Grade:", grade)
+    student.show_info()
 
 
 def show_students():
@@ -116,32 +106,10 @@ def show_students():
     ):
 
         print(
-            "\nStudent",
-            number
+            f"\nStudent {number}"
         )
 
-        print(
-            "Name:",
-            student["name"]
-        )
-
-        print(
-            "Marks:",
-            student["marks"]
-        )
-
-        print(
-            "Average:",
-            round(
-                student["average"],
-                2
-            )
-        )
-
-        print(
-            "Grade:",
-            student["grade"]
-        )
+        student.show_info()
 
 
 def search_student():
@@ -160,47 +128,20 @@ def search_student():
         "Enter the student's name: "
     ).strip().lower()
 
-    found = False
-
     for student in students:
 
         if (
-            student["name"].lower()
+            student.name.lower()
             == search_name
         ):
 
             print("\nStudent found!")
 
-            print(
-                "Name:",
-                student["name"]
-            )
+            student.show_info()
 
-            print(
-                "Marks:",
-                student["marks"]
-            )
+            return
 
-            print(
-                "Average:",
-                round(
-                    student["average"],
-                    2
-                )
-            )
-
-            print(
-                "Grade:",
-                student["grade"]
-            )
-
-            found = True
-
-            break
-
-    if not found:
-
-        print("Student not found.")
+    print("Student not found.")
 
 
 def remove_student():
@@ -222,7 +163,7 @@ def remove_student():
     for student in students:
 
         if (
-            student["name"].lower()
+            student.name.lower()
             == remove_name
         ):
 
@@ -231,7 +172,7 @@ def remove_student():
             save_students(students)
 
             print(
-                f"{student['name']} "
+                f"{student.name} "
                 "has been removed successfully."
             )
 
@@ -254,28 +195,13 @@ def show_top_student():
 
     top_student = max(
         students,
-        key=lambda student: student["average"]
+        key=lambda student:
+        student.calculate_average()
     )
 
     print("\n🏆 Top Student")
 
-    print(
-        "Name:",
-        top_student["name"]
-    )
-
-    print(
-        "Average:",
-        round(
-            top_student["average"],
-            2
-        )
-    )
-
-    print(
-        "Grade:",
-        top_student["grade"]
-    )
+    top_student.show_info()
 
 
 def show_menu():

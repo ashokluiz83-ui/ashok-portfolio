@@ -18,37 +18,26 @@ class Student:
         average = self.calculate_average()
 
         if average >= 80:
-
             return "A"
 
         elif average >= 70:
-
             return "B"
 
         elif average >= 60:
-
             return "C"
 
         elif average >= 50:
-
             return "D"
 
         else:
-
             return "F"
 
 
     def show_info(self):
 
-        print(
-            "\nName:",
-            self.name
-        )
+        print("\nName:", self.name)
 
-        print(
-            "Marks:",
-            self.marks
-        )
+        print("Marks:", self.marks)
 
         print(
             "Average:",
@@ -62,26 +51,3 @@ class Student:
             "Grade:",
             self.get_grade()
         )
-
-
-student1 = Student(
-    "Ashok",
-    [80, 90, 85]
-)
-
-student2 = Student(
-    "Mary",
-    [95, 88, 92]
-)
-
-student3 = Student(
-    "John",
-    [65, 70, 68]
-)
-
-
-student1.show_info()
-
-student2.show_info()
-
-student3.show_info()
