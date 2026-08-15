@@ -1,14 +1,15 @@
-# Python
+# Python cache
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *.pyo
 
-# Virtual environments
+# Python environments
 venv/
 .venv/
 env/
 
-# Test and coverage files
+# Testing
 .pytest_cache/
 .coverage
 htmlcov/
@@ -18,9 +19,9 @@ report_*.txt
 school_report.txt
 class_report.txt
 
-# Editor files
+# VS Code
 .vscode/
 
-# Operating system files
+# Operating system
 .DS_Store
 Thumbs.db
