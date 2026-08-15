@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Classes</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>🏫 Classes</h1>
+
+    <p>Students grouped by class</p>
+
+</header>
+
+
+<main>
+
+    {% if class_groups %}
+
+        {% for class_name, students in class_groups.items() %}
+
+        <section class="table-card">
+
+            <h2>
+                Class {{ class_name }}
+            </h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Average</th>
+                            <th>Grade</th>
+                            <th>Details</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for student in students %}
+
+                        <tr>
+
+                            <td>
+                                {{ student.student_id }}
+                            </td>
+
+                            <td>
+                                {{ student.name }}
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(student.calculate_average()) }}
+                            </td>
+
+                            <td>
+                                <strong>
+                                    {{ student.get_grade() }}
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <a
+                                    class="small-button"
+                                    href="{{ url_for('student_details', student_id=student.student_id) }}"
+                                >
+                                    View
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        {% endfor %}
+
+    {% else %}
+
+        <section class="empty-card">
+
+            <h2>No Classes</h2>
+
+            <p>No students have been added yet.</p>
+
+        </section>
+
+    {% endif %}
+
+
+    <div class="page-actions">
+
+        <a
+            class="button"
+            href="{{ url_for('dashboard') }}"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

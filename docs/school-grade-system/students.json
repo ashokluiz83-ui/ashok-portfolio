@@ -1,10 +1,10 @@
 [
     {
-        "student_id": 1001,
+        "student_id": 1002,
         "name": "Ashok",
         "class_name": "2A",
         "subjects": {
-            "Mathematics: 80": 80.0,
+            "Mathematics": 80.0,
             "English": 75.0,
             "Science": 90.0,
             "Computer Studies": 95.0

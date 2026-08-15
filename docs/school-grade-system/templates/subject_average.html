@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Subject Averages</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📈 Subject Averages</h1>
+
+    <p>Average performance by subject</p>
+
+</header>
+
+
+<main>
+
+
+    {% if averages %}
+
+    <section class="table-card">
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Subject
+                        </th>
+
+                        <th>
+                            Average Mark
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for subject, average in averages.items() %}
+
+                    <tr>
+
+                        <td>
+                            {{ subject }}
+                        </td>
+
+                        <td>
+                            {{ "%.2f"|format(average) }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    {% else %}
+
+    <section class="empty-card">
+
+        <h2>No Subject Data</h2>
+
+        <p>Add students and marks first.</p>
+
+    </section>
+
+    {% endif %}
+
+
+    <div class="page-actions">
+
+        <a
+            class="button"
+            href="{{ url_for('dashboard') }}"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

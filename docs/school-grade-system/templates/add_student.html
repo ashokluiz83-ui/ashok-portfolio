@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Add Student</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header>
+
+        <h1>
+            ➕ Add Student
+        </h1>
+
+        <p>
+            Enter student information and academic marks
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <section class="form-card">
+
+
+            <form
+                method="POST"
+            >
+
+
+                <label for="name">
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter student name"
+                    required
+                >
+
+
+                <label for="class_name">
+                    Class
+                </label>
+
+                <input
+                    type="text"
+                    id="class_name"
+                    name="class_name"
+                    placeholder="Example: 2A"
+                    required
+                >
+
+
+                <h2>
+                    Subjects
+                </h2>
+
+
+                <div class="subject-row">
+
+                    <input
+                        type="text"
+                        name="subject_name"
+                        placeholder="Subject name"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        name="subject_mark"
+                        placeholder="Mark"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="subject-row">
+
+                    <input
+                        type="text"
+                        name="subject_name"
+                        placeholder="Subject name"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        name="subject_mark"
+                        placeholder="Mark"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="subject-row">
+
+                    <input
+                        type="text"
+                        name="subject_name"
+                        placeholder="Subject name"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        name="subject_mark"
+                        placeholder="Mark"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="subject-row">
+
+                    <input
+                        type="text"
+                        name="subject_name"
+                        placeholder="Subject name"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        name="subject_mark"
+                        placeholder="Mark"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="button"
+                >
+                    Save Student
+                </button>
+
+
+                <a
+                    class="button secondary-button"
+                    href="{{ url_for('dashboard') }}"
+                >
+                    Cancel
+                </a>
+
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>

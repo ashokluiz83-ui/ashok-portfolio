@@ -553,3 +553,115 @@ body.dark-mode .hero img {
     }
 }
 ```
+.table-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+
+.table-container {
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+th {
+    background: #1f4e79;
+    color: white;
+}
+
+
+tr:hover {
+    background: #f5f7fa;
+}
+
+
+.small-button {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #1f4e79;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+
+.small-button:hover {
+    opacity: 0.85;
+}
+
+
+.empty-card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.page-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+
+.secondary-button {
+    background: #555;
+}.delete-button {
+    background: #b91c1c;
+    border: none;
+    cursor: pointer;
+}
+
+
+.delete-button:hover {
+    background: #991b1b;
+}
+
+
+.student-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.subjects-list {
+    margin: 20px 0;
+}
+
+
+.subject-result {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.result-summary {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f5f7fa;
+    border-radius: 10px;
+}

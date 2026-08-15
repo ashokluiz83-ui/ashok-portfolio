@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Report</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📄 School Report</h1>
+
+    <p>
+        Generated {{ generated_at.strftime("%Y-%m-%d %H:%M") }}
+    </p>
+
+</header>
+
+
+<main>
+
+
+    {% if students %}
+
+    {% for student in students %}
+
+    <section class="student-card">
+
+        <h2>
+            {{ student.name }}
+        </h2>
+
+        <p>
+            <strong>ID:</strong>
+            {{ student.student_id }}
+        </p>
+
+        <p>
+            <strong>Class:</strong>
+            {{ student.class_name }}
+        </p>
+
+
+        <h3>
+            Subjects
+        </h3>
+
+
+        {% for subject, mark in student.subjects.items() %}
+
+        <p>
+            {{ subject }}:
+            <strong>{{ mark }}</strong>
+        </p>
+
+        {% endfor %}
+
+
+        <p>
+            <strong>
+                Average:
+            </strong>
+
+            {{ "%.2f"|format(student.calculate_average()) }}
+        </p>
+
+
+        <p>
+            <strong>
+                Grade:
+            </strong>
+
+            {{ student.get_grade() }}
+        </p>
+
+    </section>
+
+    {% endfor %}
+
+    {% else %}
+
+    <section class="empty-card">
+
+        <h2>
+            No Students
+        </h2>
+
+        <p>
+            There are no students to include in the report.
+        </p>
+
+    </section>
+
+    {% endif %}
+
+
+    <div class="page-actions">
+
+        <a
+            class="button"
+            href="{{ url_for('download_report') }}"
+        >
+            ⬇️ Download Report
+        </a>
+
+
+        <a
+            class="button secondary-button"
+            href="{{ url_for('dashboard') }}"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+</main>
+
+</body>
+
+</html>

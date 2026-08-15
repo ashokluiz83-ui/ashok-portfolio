@@ -1,0 +1,519 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Grade System</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="nav-container">
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('dashboard') }}">
+                    Home
+                </a>
+
+                <a href="{{ url_for('add_student') }}">
+                    Add Student
+                </a>
+
+                <a href="{{ url_for('view_students') }}">
+                    Students
+                </a>
+
+                <a href="{{ url_for('search_student') }}">
+                    Search
+                </a>
+
+                <a href="{{ url_for('classes') }}">
+                    Classes
+                </a>
+
+                <a href="{{ url_for('statistics') }}">
+                    Statistics
+                </a>
+
+                <a href="{{ url_for('report') }}">
+                    Reports
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <h1>
+            🏫 School Grade System
+        </h1>
+
+        <p>
+            Student and academic management dashboard
+        </p>
+
+        <p>
+            Manage students, marks, grades, classes,
+            statistics, and reports from one place.
+        </p>
+
+        <a
+            class="button"
+            href="{{ url_for('add_student') }}"
+        >
+            ➕ Add Student
+        </a>
+
+    </section>
+
+
+    <!-- Main Dashboard -->
+
+    <main>
+
+
+        <!-- Student Management -->
+
+        <section class="card">
+
+            <h2>
+                👨‍🎓 Student Management
+            </h2>
+
+            <p>
+                Manage student records and academic information.
+            </p>
+
+
+            <div class="projects-container">
+
+
+                <!-- Add Student -->
+
+                <div class="project">
+
+                    <h3>
+                        ➕ Add Student
+                    </h3>
+
+                    <p>
+                        Add a new student and enter their
+                        subjects and marks.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('add_student') }}"
+                    >
+                        Add Student
+                    </a>
+
+                </div>
+
+
+                <!-- View Students -->
+
+                <div class="project">
+
+                    <h3>
+                        👨‍🎓 View Students
+                    </h3>
+
+                    <p>
+                        View all students and their
+                        academic results.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('view_students') }}"
+                    >
+                        View Students
+                    </a>
+
+                </div>
+
+
+                <!-- Search -->
+
+                <div class="project">
+
+                    <h3>
+                        🔎 Search Student
+                    </h3>
+
+                    <p>
+                        Quickly find a student by name,
+                        ID, or class.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('search_student') }}"
+                    >
+                        Search Student
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Academic Management -->
+
+        <section class="card">
+
+            <h2>
+                📊 Academic Management
+            </h2>
+
+            <p>
+                Analyze student performance and academic results.
+            </p>
+
+
+            <div class="projects-container">
+
+
+                <!-- Classes -->
+
+                <div class="project">
+
+                    <h3>
+                        🏫 Classes
+                    </h3>
+
+                    <p>
+                        View students grouped by class.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('classes') }}"
+                    >
+                        View Classes
+                    </a>
+
+                </div>
+
+
+                <!-- Statistics -->
+
+                <div class="project">
+
+                    <h3>
+                        📊 Class Statistics
+                    </h3>
+
+                    <p>
+                        View class averages, highest marks,
+                        passing rates, and more.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('statistics') }}"
+                    >
+                        View Statistics
+                    </a>
+
+                </div>
+
+
+                <!-- Top Student -->
+
+                <div class="project">
+
+                    <h3>
+                        🏆 Top Student
+                    </h3>
+
+                    <p>
+                        Find the student with the highest
+                        academic average.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('top_student') }}"
+                    >
+                        View Top Student
+                    </a>
+
+                </div>
+
+
+                <!-- Subject Average -->
+
+                <div class="project">
+
+                    <h3>
+                        📈 Subject Averages
+                    </h3>
+
+                    <p>
+                        Compare average marks across
+                        different subjects.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('subject_average') }}"
+                    >
+                        View Averages
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Reports -->
+
+        <section class="card">
+
+            <h2>
+                📄 Reports
+            </h2>
+
+            <p>
+                Generate and download academic reports.
+            </p>
+
+
+            <div class="projects-container">
+
+
+                <div class="project">
+
+                    <h3>
+                        📄 School Report
+                    </h3>
+
+                    <p>
+                        View a complete academic report
+                        for all students.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('report') }}"
+                    >
+                        View Report
+                    </a>
+
+                </div>
+
+
+                <div class="project">
+
+                    <h3>
+                        ⬇️ Download Report
+                    </h3>
+
+                    <p>
+                        Download the student report as
+                        a text file.
+                    </p>
+
+                    <a
+                        class="button"
+                        href="{{ url_for('download_report') }}"
+                    >
+                        Download Report
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Current Students -->
+
+        <section class="card">
+
+            <h2>
+                👥 Current Students
+            </h2>
+
+
+            {% if students %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Class
+                            </th>
+
+                            <th>
+                                Average
+                            </th>
+
+                            <th>
+                                Grade
+                            </th>
+
+                            <th>
+                                Details
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for student in students %}
+
+                        <tr>
+
+                            <td>
+                                {{ student.student_id }}
+                            </td>
+
+                            <td>
+                                {{ student.name }}
+                            </td>
+
+                            <td>
+                                {{ student.class_name }}
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(student.calculate_average()) }}
+                            </td>
+
+                            <td>
+                                <strong>
+                                    {{ student.get_grade() }}
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <a
+                                    class="small-button"
+                                    href="{{ url_for('student_details', student_id=student.student_id) }}"
+                                >
+                                    View
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="empty-card">
+
+                <h3>
+                    No Students Yet
+                </h3>
+
+                <p>
+                    Add your first student to begin
+                    using the school grade system.
+                </p>
+
+                <a
+                    class="button"
+                    href="{{ url_for('add_student') }}"
+                >
+                    ➕ Add First Student
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            🏫 School Grade System
+        </p>
+
+        <p>
+            Built with Python + Flask
+        </p>
+
+        <p>
+            Student Management • Academic Results • Reports
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+```

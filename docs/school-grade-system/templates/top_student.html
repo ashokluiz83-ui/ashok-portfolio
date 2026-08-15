@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Top Student</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>🏆 Top Student</h1>
+
+    <p>Student with the highest average</p>
+
+</header>
+
+
+<main>
+
+
+    {% if student %}
+
+    <section class="student-card">
+
+        <h2>
+            🏆 {{ student.name }}
+        </h2>
+
+        <p>
+            <strong>ID:</strong>
+            {{ student.student_id }}
+        </p>
+
+        <p>
+            <strong>Class:</strong>
+            {{ student.class_name }}
+        </p>
+
+        <p>
+            <strong>Average:</strong>
+            {{ "%.2f"|format(student.calculate_average()) }}
+        </p>
+
+        <p>
+            <strong>Grade:</strong>
+            {{ student.get_grade() }}
+        </p>
+
+
+        <a
+            class="button"
+            href="{{ url_for('student_details', student_id=student.student_id) }}"
+        >
+            View Student
+        </a>
+
+    </section>
+
+    {% else %}
+
+    <section class="empty-card">
+
+        <h2>No Students</h2>
+
+        <p>Add students before viewing the top student.</p>
+
+    </section>
+
+    {% endif %}
+
+
+    <div class="page-actions">
+
+        <a
+            class="button secondary-button"
+            href="{{ url_for('dashboard') }}"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+</main>
+
+</body>
+
+</html>

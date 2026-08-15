@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Student</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header>
+
+        <h1>
+            ✏️ Edit Student
+        </h1>
+
+        <p>
+            Update student information and marks
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <section class="form-card">
+
+
+            <form
+                method="POST"
+            >
+
+
+                <label for="name">
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ student.name }}"
+                    required
+                >
+
+
+                <label for="class_name">
+                    Class
+                </label>
+
+                <input
+                    type="text"
+                    id="class_name"
+                    name="class_name"
+                    value="{{ student.class_name }}"
+                    required
+                >
+
+
+                <h2>
+                    Subjects
+                </h2>
+
+
+                {% for subject, mark in student.subjects.items() %}
+
+
+                <div class="subject-row">
+
+                    <input
+                        type="text"
+                        name="subject_name"
+                        value="{{ subject }}"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        name="subject_mark"
+                        value="{{ mark }}"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        required
+                    >
+
+                </div>
+
+
+                {% endfor %}
+
+
+                <button
+                    type="submit"
+                    class="button"
+                >
+                    💾 Save Changes
+                </button>
+
+
+                <a
+                    class="button secondary-button"
+                    href="{{ url_for('student_details', student_id=student.student_id) }}"
+                >
+                    Cancel
+                </a>
+
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>
