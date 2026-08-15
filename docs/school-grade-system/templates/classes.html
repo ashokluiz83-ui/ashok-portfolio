@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,123 +20,188 @@
 
 </head>
 
+
 <body>
 
-<header>
 
-    <h1>🏫 Classes</h1>
+    <nav>
 
-    <p>Students grouped by class</p>
+        <div class="nav-container">
 
-</header>
+            <div class="nav-links">
 
+                <a href="{{ url_for('dashboard') }}">
+                    Home
+                </a>
 
-<main>
+                <a href="{{ url_for('add_student') }}">
+                    Add Student
+                </a>
 
-    {% if class_groups %}
+                <a href="{{ url_for('view_students') }}">
+                    Students
+                </a>
 
-        {% for class_name, students in class_groups.items() %}
+                <a href="{{ url_for('search_student') }}">
+                    Search
+                </a>
 
-        <section class="table-card">
+                <a href="{{ url_for('classes') }}">
+                    Classes
+                </a>
 
-            <h2>
-                Class {{ class_name }}
-            </h2>
+                <a href="{{ url_for('statistics') }}">
+                    Statistics
+                </a>
 
-            <div class="table-container">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Average</th>
-                            <th>Grade</th>
-                            <th>Details</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        {% for student in students %}
-
-                        <tr>
-
-                            <td>
-                                {{ student.student_id }}
-                            </td>
-
-                            <td>
-                                {{ student.name }}
-                            </td>
-
-                            <td>
-                                {{ "%.2f"|format(student.calculate_average()) }}
-                            </td>
-
-                            <td>
-                                <strong>
-                                    {{ student.get_grade() }}
-                                </strong>
-                            </td>
-
-                            <td>
-
-                                <a
-                                    class="small-button"
-                                    href="{{ url_for('student_details', student_id=student.student_id) }}"
-                                >
-                                    View
-                                </a>
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
+                <a href="{{ url_for('report') }}">
+                    Reports
+                </a>
 
             </div>
 
+        </div>
+
+    </nav>
+
+
+    <header>
+
+        <h1>
+            🏫 Classes
+        </h1>
+
+        <p>
+            Select a class to view its students.
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        {% if class_data %}
+
+
+        <section class="card">
+
+            <h2>
+                Available Classes
+            </h2>
+
+
+            <div class="projects-container">
+
+
+                {% for class_name, data in class_data.items() %}
+
+
+                <div class="project">
+
+
+                    <h3>
+                        🏫 Class {{ class_name }}
+                    </h3>
+
+
+                    <p>
+
+                        <strong>
+                            Students:
+                        </strong>
+
+                        {{ data.students|length }}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Class Average:
+                        </strong>
+
+                        {{ "%.2f"|format(data.average) }}
+
+                    </p>
+
+
+                    <a
+                        class="button"
+                        href="{{ url_for('class_students', class_name=class_name) }}"
+                    >
+                        View Class
+                    </a>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
         </section>
 
-        {% endfor %}
 
-    {% else %}
+        {% else %}
+
 
         <section class="empty-card">
 
-            <h2>No Classes</h2>
+            <h2>
+                No Classes Yet
+            </h2>
 
-            <p>No students have been added yet.</p>
+            <p>
+                Add students to create classes.
+            </p>
+
+            <a
+                class="button"
+                href="{{ url_for('add_student') }}"
+            >
+                ➕ Add Student
+            </a>
 
         </section>
 
-    {% endif %}
+
+        {% endif %}
 
 
-    <div class="page-actions">
+        <div class="page-actions">
 
-        <a
-            class="button"
-            href="{{ url_for('dashboard') }}"
-        >
-            ← Dashboard
-        </a>
+            <a
+                class="button secondary-button"
+                href="{{ url_for('dashboard') }}"
+            >
+                ← Dashboard
+            </a>
 
-    </div>
+        </div>
 
-</main>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            🏫 School Grade System
+        </p>
+
+        <p>
+            Built with Python + Flask
+        </p>
+
+    </footer>
+
 
 </body>
 
 </html>
+```

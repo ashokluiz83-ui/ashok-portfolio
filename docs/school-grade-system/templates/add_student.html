@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +24,47 @@
 <body>
 
 
+    <nav>
+
+        <div class="nav-container">
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('dashboard') }}">
+                    Home
+                </a>
+
+                <a href="{{ url_for('add_student') }}">
+                    Add Student
+                </a>
+
+                <a href="{{ url_for('view_students') }}">
+                    Students
+                </a>
+
+                <a href="{{ url_for('search_student') }}">
+                    Search
+                </a>
+
+                <a href="{{ url_for('classes') }}">
+                    Classes
+                </a>
+
+                <a href="{{ url_for('statistics') }}">
+                    Statistics
+                </a>
+
+                <a href="{{ url_for('report') }}">
+                    Reports
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
     <header>
 
         <h1>
@@ -30,7 +72,7 @@
         </h1>
 
         <p>
-            Enter student information and academic marks
+            Enter student information and academic marks.
         </p>
 
     </header>
@@ -44,7 +86,13 @@
 
             <form
                 method="POST"
+                action="{{ url_for('add_student') }}"
             >
+
+
+                <h2>
+                    Student Information
+                </h2>
 
 
                 <label for="name">
@@ -64,17 +112,85 @@
                     Class
                 </label>
 
-                <input
-                    type="text"
+                <select
                     id="class_name"
                     name="class_name"
-                    placeholder="Example: 2A"
                     required
                 >
 
+                    <option value="">
+                        -- Select Class --
+                    </option>
+
+                    <option value="1A">
+                        1A
+                    </option>
+
+                    <option value="1B">
+                        1B
+                    </option>
+
+                    <option value="2A">
+                        2A
+                    </option>
+
+                    <option value="2B">
+                        2B
+                    </option>
+
+                    <option value="3A">
+                        3A
+                    </option>
+
+                    <option value="3B">
+                        3B
+                    </option>
+
+                    <option value="4A">
+                        4A
+                    </option>
+
+                    <option value="4B">
+                        4B
+                    </option>
+
+                    <option value="5A">
+                        5A
+                    </option>
+
+                    <option value="5B">
+                        5B
+                    </option>
+
+                    <option value="6A">
+                        6A
+                    </option>
+
+                    <option value="6B">
+                        6B
+                    </option>
+
+                    <option value="7A">
+                        7A
+                    </option>
+
+                    <option value="7B">
+                        7B
+                    </option>
+
+                    <option value="8A">
+                        8A
+                    </option>
+
+                    <option value="8B">
+                        8B
+                    </option>
+
+                </select>
+
 
                 <h2>
-                    Subjects
+                    Subjects and Marks
                 </h2>
 
 
@@ -83,17 +199,17 @@
                     <input
                         type="text"
                         name="subject_name"
-                        placeholder="Subject name"
+                        value="Mathematics"
                         required
                     >
 
                     <input
                         type="number"
                         name="subject_mark"
-                        placeholder="Mark"
                         min="0"
                         max="100"
                         step="0.1"
+                        placeholder="Mark"
                         required
                     >
 
@@ -105,17 +221,17 @@
                     <input
                         type="text"
                         name="subject_name"
-                        placeholder="Subject name"
+                        value="English"
                         required
                     >
 
                     <input
                         type="number"
                         name="subject_mark"
-                        placeholder="Mark"
                         min="0"
                         max="100"
                         step="0.1"
+                        placeholder="Mark"
                         required
                     >
 
@@ -127,17 +243,17 @@
                     <input
                         type="text"
                         name="subject_name"
-                        placeholder="Subject name"
+                        value="Science"
                         required
                     >
 
                     <input
                         type="number"
                         name="subject_mark"
-                        placeholder="Mark"
                         min="0"
                         max="100"
                         step="0.1"
+                        placeholder="Mark"
                         required
                     >
 
@@ -149,17 +265,17 @@
                     <input
                         type="text"
                         name="subject_name"
-                        placeholder="Subject name"
+                        value="Computer Studies"
                         required
                     >
 
                     <input
                         type="number"
                         name="subject_mark"
-                        placeholder="Mark"
                         min="0"
                         max="100"
                         step="0.1"
+                        placeholder="Mark"
                         required
                     >
 
@@ -170,7 +286,7 @@
                     type="submit"
                     class="button"
                 >
-                    Save Student
+                    💾 Save Student
                 </button>
 
 
@@ -191,6 +307,20 @@
     </main>
 
 
+    <footer>
+
+        <p>
+            🏫 School Grade System
+        </p>
+
+        <p>
+            Built with Python + Flask
+        </p>
+
+    </footer>
+
+
 </body>
 
 </html>
+```

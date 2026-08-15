@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for, send_file
 from io import BytesIO
 from datetime import datetime
@@ -45,9 +46,7 @@ def add_student():
 
                 subjects[subject_name] = float(mark)
 
-
         students = load_students()
-
 
         if students:
 
@@ -60,7 +59,6 @@ def add_student():
 
             next_id = 1001
 
-
         student = Student(
             next_id,
             name,
@@ -68,11 +66,9 @@ def add_student():
             subjects
         )
 
-
         students.append(student)
 
         save_students(students)
-
 
         return redirect(
             url_for(
@@ -80,7 +76,6 @@ def add_student():
                 student_id=student.student_id
             )
         )
-
 
     return render_template(
         "add_student.html"
@@ -106,11 +101,9 @@ def search_student():
         ""
     ).strip().lower()
 
-
     students = load_students()
 
     results = []
-
 
     if query:
 
@@ -124,7 +117,6 @@ def search_student():
 
             class_name = student.class_name.lower()
 
-
             if (
                 query in student_id
                 or query in name
@@ -132,7 +124,6 @@ def search_student():
             ):
 
                 results.append(student)
-
 
     return render_template(
         "search.html",
@@ -149,7 +140,6 @@ def edit_student(student_id):
 
     students = load_students()
 
-
     student = next(
         (
             student
@@ -159,11 +149,9 @@ def edit_student(student_id):
         None
     )
 
-
     if student is None:
 
         return "Student not found", 404
-
 
     if request.method == "POST":
 
@@ -171,11 +159,9 @@ def edit_student(student_id):
             "name"
         ].strip()
 
-
         student.class_name = request.form[
             "class_name"
         ].strip()
-
 
         subjects = {}
 
@@ -186,7 +172,6 @@ def edit_student(student_id):
         subject_marks = request.form.getlist(
             "subject_mark"
         )
-
 
         for subject_name, mark in zip(
             subject_names,
@@ -201,12 +186,9 @@ def edit_student(student_id):
                     subject_name
                 ] = float(mark)
 
-
         student.subjects = subjects
 
-
         save_students(students)
-
 
         return redirect(
             url_for(
@@ -214,7 +196,6 @@ def edit_student(student_id):
                 student_id=student.student_id
             )
         )
-
 
     return render_template(
         "edit_student.html",
@@ -230,16 +211,13 @@ def delete_student(student_id):
 
     students = load_students()
 
-
     students = [
         student
         for student in students
         if student.student_id != student_id
     ]
 
-
     save_students(students)
-
 
     return redirect(
         url_for(
@@ -253,7 +231,6 @@ def student_details(student_id):
 
     students = load_students()
 
-
     student = next(
         (
             student
@@ -263,11 +240,9 @@ def student_details(student_id):
         None
     )
 
-
     if student is None:
 
         return "Student not found", 404
-
 
     return render_template(
         "student_details.html",
@@ -282,7 +257,6 @@ def classes():
 
     class_groups = {}
 
-
     for student in students:
 
         class_name = student.class_name
@@ -291,15 +265,83 @@ def classes():
 
             class_groups[class_name] = []
 
-
         class_groups[class_name].append(
             student
         )
 
+    class_data = {}
+
+    for class_name, class_students in class_groups.items():
+
+        averages = [
+            student.calculate_average()
+            for student in class_students
+        ]
+
+        if averages:
+
+            class_average = (
+                sum(averages)
+                / len(averages)
+            )
+
+        else:
+
+            class_average = 0
+
+        class_data[class_name] = {
+            "students": class_students,
+            "average": class_average
+        }
+
+    class_data = dict(
+        sorted(
+            class_data.items()
+        )
+    )
 
     return render_template(
         "classes.html",
-        class_groups=class_groups
+        class_data=class_data
+    )
+
+
+@app.route("/class/<path:class_name>")
+def class_students(class_name):
+
+    students = load_students()
+
+    class_students_list = [
+        student
+        for student in students
+        if student.class_name.lower()
+        == class_name.lower()
+    ]
+
+    class_students_list.sort(
+        key=lambda student:
+        student.name.lower()
+    )
+
+    class_average = 0
+
+    if class_students_list:
+
+        averages = [
+            student.calculate_average()
+            for student in class_students_list
+        ]
+
+        class_average = (
+            sum(averages)
+            / len(averages)
+        )
+
+    return render_template(
+        "class_students.html",
+        class_name=class_name,
+        students=class_students_list,
+        class_average=class_average
     )
 
 
@@ -307,7 +349,6 @@ def classes():
 def statistics():
 
     students = load_students()
-
 
     if not students:
 
@@ -329,13 +370,11 @@ def statistics():
             for student in students
         ]
 
-
         passing = [
             average
             for average in averages
             if average >= 50
         ]
-
 
         failing = [
             average
@@ -343,29 +382,37 @@ def statistics():
             if average < 50
         ]
 
-
         statistics_data = {
 
             "count": len(students),
 
-            "average": sum(averages) / len(averages),
+            "average":
+                sum(averages)
+                / len(averages),
 
-            "highest": max(averages),
+            "highest":
+                max(averages),
 
-            "lowest": min(averages),
+            "lowest":
+                min(averages),
 
-            "passing": len(passing),
+            "passing":
+                len(passing),
 
-            "failing": len(failing),
+            "failing":
+                len(failing),
 
             "pass_percentage":
-                len(passing) / len(students) * 100,
+                len(passing)
+                / len(students)
+                * 100,
 
             "fail_percentage":
-                len(failing) / len(students) * 100
+                len(failing)
+                / len(students)
+                * 100
 
         }
-
 
     return render_template(
         "statistics.html",
@@ -378,7 +425,6 @@ def top_student():
 
     students = load_students()
 
-
     if not students:
 
         return render_template(
@@ -386,13 +432,11 @@ def top_student():
             student=None
         )
 
-
     student = max(
         students,
         key=lambda student:
-            student.calculate_average()
+        student.calculate_average()
     )
-
 
     return render_template(
         "top_student.html",
@@ -407,7 +451,6 @@ def subject_average():
 
     subject_marks = {}
 
-
     for student in students:
 
         for subject, mark in student.subjects.items():
@@ -416,21 +459,18 @@ def subject_average():
 
                 subject_marks[subject] = []
 
-
             subject_marks[subject].append(
                 mark
             )
 
-
     averages = {}
-
 
     for subject, marks in subject_marks.items():
 
         averages[subject] = (
-            sum(marks) / len(marks)
+            sum(marks)
+            / len(marks)
         )
-
 
     return render_template(
         "subject_average.html",
@@ -443,7 +483,6 @@ def report():
 
     students = load_students()
 
-
     return render_template(
         "report.html",
         students=students,
@@ -455,7 +494,6 @@ def report():
 def download_report():
 
     students = load_students()
-
 
     lines = []
 
@@ -472,7 +510,6 @@ def download_report():
     )
 
     lines.append("")
-
 
     for student in students:
 
@@ -494,15 +531,15 @@ def download_report():
 
         lines.append("")
 
-        lines.append("Subjects:")
-
+        lines.append(
+            "Subjects:"
+        )
 
         for subject, mark in student.subjects.items():
 
             lines.append(
                 f"  {subject}: {mark}"
             )
-
 
         lines.append("")
 
@@ -517,18 +554,19 @@ def download_report():
 
         lines.append("")
 
-
-    report_text = "\n".join(lines)
-
+    report_text = "\n".join(
+        lines
+    )
 
     file = BytesIO()
 
     file.write(
-        report_text.encode("utf-8")
+        report_text.encode(
+            "utf-8"
+        )
     )
 
     file.seek(0)
-
 
     return send_file(
         file,

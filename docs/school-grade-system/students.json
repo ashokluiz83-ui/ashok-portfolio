@@ -9,5 +9,16 @@
             "Science": 90.0,
             "Computer Studies": 95.0
         }
+    },
+    {
+        "student_id": 1003,
+        "name": "Mary",
+        "class_name": "2B",
+        "subjects": {
+            "Mathematics": 80.0,
+            "English": 75.0,
+            "Science": 95.0,
+            "Computer Studies": 90.0
+        }
     }
 ]
