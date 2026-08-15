@@ -285,13 +285,62 @@ def classes():
                 / len(averages)
             )
 
+            highest_average = max(averages)
+
+            lowest_average = min(averages)
+
+            passing = [
+                average
+                for average in averages
+                if average >= 50
+            ]
+
+            failing = [
+                average
+                for average in averages
+                if average < 50
+            ]
+
+            pass_percentage = (
+                len(passing)
+                / len(averages)
+                * 100
+            )
+
+            fail_percentage = (
+                len(failing)
+                / len(averages)
+                * 100
+            )
+
         else:
 
             class_average = 0
+            highest_average = 0
+            lowest_average = 0
+            passing = []
+            failing = []
+            pass_percentage = 0
+            fail_percentage = 0
 
         class_data[class_name] = {
+
             "students": class_students,
-            "average": class_average
+
+            "average": class_average,
+
+            "highest": highest_average,
+
+            "lowest": lowest_average,
+
+            "passing": len(passing),
+
+            "failing": len(failing),
+
+            "pass_percentage": pass_percentage,
+
+            "fail_percentage": fail_percentage
+
         }
 
     class_data = dict(
@@ -324,6 +373,12 @@ def class_students(class_name):
     )
 
     class_average = 0
+    highest_average = 0
+    lowest_average = 0
+    passing = 0
+    failing = 0
+    pass_percentage = 0
+    fail_percentage = 0
 
     if class_students_list:
 
@@ -337,11 +392,368 @@ def class_students(class_name):
             / len(averages)
         )
 
+        highest_average = max(
+            averages
+        )
+
+        lowest_average = min(
+            averages
+        )
+
+        passing = sum(
+            1
+            for average in averages
+            if average >= 50
+        )
+
+        failing = sum(
+            1
+            for average in averages
+            if average < 50
+        )
+
+        pass_percentage = (
+            passing
+            / len(averages)
+            * 100
+        )
+
+        fail_percentage = (
+            failing
+            / len(averages)
+            * 100
+        )
+
     return render_template(
         "class_students.html",
         class_name=class_name,
         students=class_students_list,
-        class_average=class_average
+        class_average=class_average,
+        highest_average=highest_average,
+        lowest_average=lowest_average,
+        passing=passing,
+        failing=failing,
+        pass_percentage=pass_percentage,
+        fail_percentage=fail_percentage
+    )
+
+
+@app.route(
+    "/class/<path:class_name>/report"
+)
+def class_report(class_name):
+
+    students = load_students()
+
+    class_students_list = [
+        student
+        for student in students
+        if student.class_name.lower()
+        == class_name.lower()
+    ]
+
+    class_students_list.sort(
+        key=lambda student:
+        student.calculate_average(),
+        reverse=True
+    )
+
+    averages = [
+        student.calculate_average()
+        for student in class_students_list
+    ]
+
+    if averages:
+
+        class_average = (
+            sum(averages)
+            / len(averages)
+        )
+
+        highest_average = max(
+            averages
+        )
+
+        lowest_average = min(
+            averages
+        )
+
+        passing = sum(
+            1
+            for average in averages
+            if average >= 50
+        )
+
+        failing = sum(
+            1
+            for average in averages
+            if average < 50
+        )
+
+        pass_percentage = (
+            passing
+            / len(averages)
+            * 100
+        )
+
+        fail_percentage = (
+            failing
+            / len(averages)
+            * 100
+        )
+
+    else:
+
+        class_average = 0
+        highest_average = 0
+        lowest_average = 0
+        passing = 0
+        failing = 0
+        pass_percentage = 0
+        fail_percentage = 0
+
+    return render_template(
+        "class_report.html",
+        class_name=class_name,
+        students=class_students_list,
+        class_average=class_average,
+        highest_average=highest_average,
+        lowest_average=lowest_average,
+        passing=passing,
+        failing=failing,
+        pass_percentage=pass_percentage,
+        fail_percentage=fail_percentage,
+        generated_at=datetime.now()
+    )
+
+
+@app.route(
+    "/class/<path:class_name>/report/download"
+)
+def download_class_report(class_name):
+
+    students = load_students()
+
+    class_students_list = [
+        student
+        for student in students
+        if student.class_name.lower()
+        == class_name.lower()
+    ]
+
+    class_students_list.sort(
+        key=lambda student:
+        student.calculate_average(),
+        reverse=True
+    )
+
+    averages = [
+        student.calculate_average()
+        for student in class_students_list
+    ]
+
+    if averages:
+
+        class_average = (
+            sum(averages)
+            / len(averages)
+        )
+
+        highest_average = max(
+            averages
+        )
+
+        lowest_average = min(
+            averages
+        )
+
+        passing = sum(
+            1
+            for average in averages
+            if average >= 50
+        )
+
+        failing = sum(
+            1
+            for average in averages
+            if average < 50
+        )
+
+        pass_percentage = (
+            passing
+            / len(averages)
+            * 100
+        )
+
+        fail_percentage = (
+            failing
+            / len(averages)
+            * 100
+        )
+
+    else:
+
+        class_average = 0
+        highest_average = 0
+        lowest_average = 0
+        passing = 0
+        failing = 0
+        pass_percentage = 0
+        fail_percentage = 0
+
+    lines = []
+
+    lines.append(
+        "SCHOOL GRADE SYSTEM"
+    )
+
+    lines.append(
+        "=" * 50
+    )
+
+    lines.append(
+        f"CLASS REPORT: {class_name}"
+    )
+
+    lines.append(
+        "=" * 50
+    )
+
+    lines.append(
+        f"Report generated: {datetime.now()}"
+    )
+
+    lines.append("")
+
+    lines.append(
+        f"Number of students: "
+        f"{len(class_students_list)}"
+    )
+
+    lines.append(
+        f"Class average: "
+        f"{class_average:.2f}"
+    )
+
+    lines.append(
+        f"Highest average: "
+        f"{highest_average:.2f}"
+    )
+
+    lines.append(
+        f"Lowest average: "
+        f"{lowest_average:.2f}"
+    )
+
+    lines.append(
+        f"Passing students: "
+        f"{passing}"
+    )
+
+    lines.append(
+        f"Failing students: "
+        f"{failing}"
+    )
+
+    lines.append(
+        f"Pass percentage: "
+        f"{pass_percentage:.2f}%"
+    )
+
+    lines.append(
+        f"Fail percentage: "
+        f"{fail_percentage:.2f}%"
+    )
+
+    lines.append("")
+
+    lines.append(
+        "STUDENT RESULTS"
+    )
+
+    lines.append(
+        "=" * 50
+    )
+
+    for position, student in enumerate(
+        class_students_list,
+        start=1
+    ):
+
+        lines.append("")
+
+        lines.append(
+            f"Position: {position}"
+        )
+
+        lines.append(
+            f"Student ID: "
+            f"{student.student_id}"
+        )
+
+        lines.append(
+            f"Name: {student.name}"
+        )
+
+        lines.append(
+            f"Class: {student.class_name}"
+        )
+
+        lines.append(
+            "Subjects:"
+        )
+
+        for subject, mark in student.subjects.items():
+
+            lines.append(
+                f"  {subject}: "
+                f"{mark:.2f}"
+            )
+
+        lines.append(
+            f"Average: "
+            f"{student.calculate_average():.2f}"
+        )
+
+        lines.append(
+            f"Grade: "
+            f"{student.get_grade()}"
+        )
+
+        lines.append(
+            "-" * 50
+        )
+
+    report_text = "\n".join(
+        lines
+    )
+
+    file = BytesIO()
+
+    file.write(
+        report_text.encode(
+            "utf-8"
+        )
+    )
+
+    file.seek(0)
+
+    safe_class_name = (
+        class_name
+        .replace(" ", "_")
+        .replace("/", "_")
+        .replace("\\", "_")
+    )
+
+    filename = (
+        f"class_{safe_class_name}_report.txt"
+    )
+
+    return send_file(
+        file,
+        as_attachment=True,
+        download_name=filename,
+        mimetype="text/plain"
     )
 
 
