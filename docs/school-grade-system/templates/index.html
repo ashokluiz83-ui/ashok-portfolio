@@ -24,11 +24,13 @@
 <body>
 
 
-    <!-- Navigation -->
-
     <nav>
 
         <div class="nav-container">
+
+            <div class="brand">
+                🏫 School Grade System
+            </div>
 
             <div class="nav-links">
 
@@ -67,397 +69,459 @@
     </nav>
 
 
-    <!-- Hero -->
+    <header class="hero">
 
-    <section class="hero">
+        <div class="hero-content">
 
-        <h1>
-            🏫 School Grade System
-        </h1>
+            <p class="eyebrow">
+                SCHOOL MANAGEMENT
+            </p>
 
-        <p>
-            Student and academic management dashboard
-        </p>
+            <h1>
+                Welcome to the
+                <span>School Grade System</span>
+            </h1>
 
-        <p>
-            Manage students, marks, grades, classes,
-            statistics, and reports from one place.
-        </p>
+            <p class="hero-text">
+                Manage students, marks, classes, grades,
+                statistics, and academic reports from one place.
+            </p>
 
-        <a
-            class="button"
-            href="{{ url_for('add_student') }}"
-        >
-            ➕ Add Student
-        </a>
+            <div class="hero-actions">
 
-    </section>
+                <a
+                    class="button"
+                    href="{{ url_for('add_student') }}"
+                >
+                    ➕ Add Student
+                </a>
 
+                <a
+                    class="button secondary-button"
+                    href="{{ url_for('view_students') }}"
+                >
+                    👨‍🎓 View Students
+                </a>
 
-    <!-- Main Dashboard -->
+            </div>
+
+        </div>
+
+    </header>
+
 
     <main>
 
 
-        <!-- Student Management -->
-
-        <section class="card">
-
-            <h2>
-                👨‍🎓 Student Management
-            </h2>
-
-            <p>
-                Manage student records and academic information.
-            </p>
+        <section class="dashboard-stats">
 
 
-            <div class="projects-container">
+            <div class="dashboard-stat-card">
 
+                <div class="stat-icon">
+                    👨‍🎓
+                </div>
 
-                <!-- Add Student -->
-
-                <div class="project">
-
-                    <h3>
-                        ➕ Add Student
-                    </h3>
+                <div>
 
                     <p>
-                        Add a new student and enter their
-                        subjects and marks.
+                        Total Students
                     </p>
 
-                    <a
-                        class="button"
-                        href="{{ url_for('add_student') }}"
-                    >
+                    <h2>
+                        {{ students|length }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="stat-icon">
+                    🏫
+                </div>
+
+                <div>
+
+                    <p>
+                        Classes
+                    </p>
+
+                    <h2>
+                        {{ students|map(attribute='class_name')|unique|list|length }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <p>
+                        School Average
+                    </p>
+
+                    <h2>
+
+                        {% if students %}
+
+                            {% set averages = [] %}
+
+                            {% for student in students %}
+
+                                {% set _ = averages.append(
+                                    student.calculate_average()
+                                ) %}
+
+                            {% endfor %}
+
+                            {{ "%.2f"|format(
+                                (averages|sum) / (averages|length)
+                            ) }}
+
+                        {% else %}
+
+                            0.00
+
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="stat-icon">
+                    🏆
+                </div>
+
+                <div>
+
+                    <p>
+                        Top Student
+                    </p>
+
+                    <h2>
+
+                        {% if students %}
+
+                            {% set top_student = students[0] %}
+
+                            {% for student in students %}
+
+                                {% if student.calculate_average() >
+                                    top_student.calculate_average() %}
+
+                                    {% set top_student = student %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                            {{ top_student.name }}
+
+                        {% else %}
+
+                            None
+
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        QUICK ACTIONS
+                    </p>
+
+                    <h2>
+                        What would you like to do?
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-actions">
+
+
+                <a
+                    class="dashboard-action-card"
+                    href="{{ url_for('add_student') }}"
+                >
+
+                    <span class="action-icon">
+                        ➕
+                    </span>
+
+                    <h3>
                         Add Student
-                    </a>
-
-                </div>
-
-
-                <!-- View Students -->
-
-                <div class="project">
-
-                    <h3>
-                        👨‍🎓 View Students
                     </h3>
 
                     <p>
-                        View all students and their
-                        academic results.
+                        Add a new student and enter subjects and marks.
                     </p>
 
-                    <a
-                        class="button"
-                        href="{{ url_for('view_students') }}"
-                    >
+                </a>
+
+
+                <a
+                    class="dashboard-action-card"
+                    href="{{ url_for('view_students') }}"
+                >
+
+                    <span class="action-icon">
+                        👨‍🎓
+                    </span>
+
+                    <h3>
                         View Students
-                    </a>
-
-                </div>
-
-
-                <!-- Search -->
-
-                <div class="project">
-
-                    <h3>
-                        🔎 Search Student
                     </h3>
 
                     <p>
-                        Quickly find a student by name,
-                        ID, or class.
+                        View student profiles, marks, averages, and grades.
                     </p>
 
-                    <a
-                        class="button"
-                        href="{{ url_for('search_student') }}"
-                    >
+                </a>
+
+
+                <a
+                    class="dashboard-action-card"
+                    href="{{ url_for('search_student') }}"
+                >
+
+                    <span class="action-icon">
+                        🔎
+                    </span>
+
+                    <h3>
                         Search Student
-                    </a>
+                    </h3>
 
-                </div>
+                    <p>
+                        Quickly find a student by name, ID, or class.
+                    </p>
+
+                </a>
+
+
+                <a
+                    class="dashboard-action-card"
+                    href="{{ url_for('classes') }}"
+                >
+
+                    <span class="action-icon">
+                        🏫
+                    </span>
+
+                    <h3>
+                        Classes
+                    </h3>
+
+                    <p>
+                        View students and performance by class.
+                    </p>
+
+                </a>
+
+
+                <a
+                    class="dashboard-action-card"
+                    href="{{ url_for('statistics') }}"
+                >
+
+                    <span class="action-icon">
+                        📊
+                    </span>
+
+                    <h3>
+                        Statistics
+                    </h3>
+
+                    <p>
+                        Analyze averages, passing rates, and performance.
+                    </p>
+
+                </a>
+
+
+                <a
+                    class="dashboard-action-card"
+                    href="{{ url_for('report') }}"
+                >
+
+                    <span class="action-icon">
+                        📄
+                    </span>
+
+                    <h3>
+                        Reports
+                    </h3>
+
+                    <p>
+                        Generate and download academic reports.
+                    </p>
+
+                </a>
 
 
             </div>
 
+
         </section>
 
 
-        <!-- Academic Management -->
-
-        <section class="card">
-
-            <h2>
-                📊 Academic Management
-            </h2>
-
-            <p>
-                Analyze student performance and academic results.
-            </p>
+        <section class="dashboard-section">
 
 
-            <div class="projects-container">
+            <div class="section-heading">
 
+                <div>
 
-                <!-- Classes -->
-
-                <div class="project">
-
-                    <h3>
-                        🏫 Classes
-                    </h3>
-
-                    <p>
-                        View students grouped by class.
+                    <p class="eyebrow">
+                        RECENT STUDENTS
                     </p>
 
-                    <a
-                        class="button"
-                        href="{{ url_for('classes') }}"
-                    >
-                        View Classes
-                    </a>
+                    <h2>
+                        Student Overview
+                    </h2>
 
                 </div>
 
 
-                <!-- Statistics -->
-
-                <div class="project">
-
-                    <h3>
-                        📊 Class Statistics
-                    </h3>
-
-                    <p>
-                        View class averages, highest marks,
-                        passing rates, and more.
-                    </p>
-
-                    <a
-                        class="button"
-                        href="{{ url_for('statistics') }}"
-                    >
-                        View Statistics
-                    </a>
-
-                </div>
-
-
-                <!-- Top Student -->
-
-                <div class="project">
-
-                    <h3>
-                        🏆 Top Student
-                    </h3>
-
-                    <p>
-                        Find the student with the highest
-                        academic average.
-                    </p>
-
-                    <a
-                        class="button"
-                        href="{{ url_for('top_student') }}"
-                    >
-                        View Top Student
-                    </a>
-
-                </div>
-
-
-                <!-- Subject Average -->
-
-                <div class="project">
-
-                    <h3>
-                        📈 Subject Averages
-                    </h3>
-
-                    <p>
-                        Compare average marks across
-                        different subjects.
-                    </p>
-
-                    <a
-                        class="button"
-                        href="{{ url_for('subject_average') }}"
-                    >
-                        View Averages
-                    </a>
-
-                </div>
-
+                <a
+                    class="text-link"
+                    href="{{ url_for('view_students') }}"
+                >
+                    View all →
+                </a>
 
             </div>
-
-        </section>
-
-
-        <!-- Reports -->
-
-        <section class="card">
-
-            <h2>
-                📄 Reports
-            </h2>
-
-            <p>
-                Generate and download academic reports.
-            </p>
-
-
-            <div class="projects-container">
-
-
-                <div class="project">
-
-                    <h3>
-                        📄 School Report
-                    </h3>
-
-                    <p>
-                        View a complete academic report
-                        for all students.
-                    </p>
-
-                    <a
-                        class="button"
-                        href="{{ url_for('report') }}"
-                    >
-                        View Report
-                    </a>
-
-                </div>
-
-
-                <div class="project">
-
-                    <h3>
-                        ⬇️ Download Report
-                    </h3>
-
-                    <p>
-                        Download the student report as
-                        a text file.
-                    </p>
-
-                    <a
-                        class="button"
-                        href="{{ url_for('download_report') }}"
-                    >
-                        Download Report
-                    </a>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- Current Students -->
-
-        <section class="card">
-
-            <h2>
-                👥 Current Students
-            </h2>
 
 
             {% if students %}
 
-            <div class="table-container">
 
-                <table>
+            <div class="table-card">
 
-                    <thead>
+                <div class="table-container">
 
-                        <tr>
+                    <table>
 
-                            <th>
-                                ID
-                            </th>
+                        <thead>
 
-                            <th>
-                                Name
-                            </th>
+                            <tr>
 
-                            <th>
-                                Class
-                            </th>
+                                <th>
+                                    ID
+                                </th>
 
-                            <th>
-                                Average
-                            </th>
+                                <th>
+                                    Name
+                                </th>
 
-                            <th>
-                                Grade
-                            </th>
+                                <th>
+                                    Class
+                                </th>
 
-                            <th>
-                                Details
-                            </th>
+                                <th>
+                                    Average
+                                </th>
 
-                        </tr>
+                                <th>
+                                    Grade
+                                </th>
 
-                    </thead>
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
 
 
-                    <tbody>
+                        <tbody>
 
-                        {% for student in students %}
+                            {% for student in students[:5] %}
 
-                        <tr>
+                            <tr>
 
-                            <td>
-                                {{ student.student_id }}
-                            </td>
+                                <td>
+                                    {{ student.student_id }}
+                                </td>
 
-                            <td>
-                                {{ student.name }}
-                            </td>
+                                <td>
+                                    <strong>
+                                        {{ student.name }}
+                                    </strong>
+                                </td>
 
-                            <td>
-                                {{ student.class_name }}
-                            </td>
+                                <td>
+                                    {{ student.class_name }}
+                                </td>
 
-                            <td>
-                                {{ "%.2f"|format(student.calculate_average()) }}
-                            </td>
+                                <td>
+                                    {{ "%.2f"|format(
+                                        student.calculate_average()
+                                    ) }}
+                                </td>
 
-                            <td>
-                                <strong>
-                                    {{ student.get_grade() }}
-                                </strong>
-                            </td>
+                                <td>
+                                    <strong>
+                                        {{ student.get_grade() }}
+                                    </strong>
+                                </td>
 
-                            <td>
+                                <td>
 
-                                <a
-                                    class="small-button"
-                                    href="{{ url_for('student_details', student_id=student.student_id) }}"
-                                >
-                                    View
-                                </a>
+                                    <a
+                                        class="small-button"
+                                        href="{{ url_for(
+                                            'student_details',
+                                            student_id=student.student_id
+                                        ) }}"
+                                    >
+                                        View
+                                    </a>
 
-                            </td>
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                        {% endfor %}
+                            {% endfor %}
 
-                    </tbody>
+                        </tbody>
 
-                </table>
+                    </table>
+
+                </div>
 
             </div>
 
@@ -467,13 +531,16 @@
 
             <div class="empty-card">
 
-                <h3>
-                    No Students Yet
-                </h3>
+                <div class="empty-icon">
+                    👨‍🎓
+                </div>
+
+                <h2>
+                    No students yet
+                </h2>
 
                 <p>
-                    Add your first student to begin
-                    using the school grade system.
+                    Add your first student to start managing academic records.
                 </p>
 
                 <a
@@ -488,13 +555,12 @@
 
             {% endif %}
 
+
         </section>
 
 
     </main>
 
-
-    <!-- Footer -->
 
     <footer>
 
@@ -504,10 +570,6 @@
 
         <p>
             Built with Python + Flask
-        </p>
-
-        <p>
-            Student Management • Academic Results • Reports
         </p>
 
     </footer>
