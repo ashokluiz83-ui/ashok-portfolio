@@ -22,13 +22,10 @@ def get_grade(average):
     elif average >= 50:
         return "D"
 
-    else:
-        return "F"
+    return "F"
 
 
-def calculate_class_statistics(
-    students
-):
+def calculate_class_statistics(students):
 
     if not students:
 
@@ -48,22 +45,13 @@ def calculate_class_statistics(
         for student in students
     ]
 
-    student_count = len(
-        students
-    )
+    count = len(students)
 
-    class_average = (
-        sum(averages)
-        / student_count
-    )
+    class_average = sum(averages) / count
 
-    highest_average = max(
-        averages
-    )
+    highest_average = max(averages)
 
-    lowest_average = min(
-        averages
-    )
+    lowest_average = min(averages)
 
     passing_students = sum(
         1
@@ -71,23 +59,18 @@ def calculate_class_statistics(
         if average >= 50
     )
 
-    failing_students = (
-        student_count
-        - passing_students
-    )
+    failing_students = count - passing_students
 
     pass_percentage = (
-        passing_students
-        / student_count
+        passing_students / count
     ) * 100
 
     fail_percentage = (
-        failing_students
-        / student_count
+        failing_students / count
     ) * 100
 
     return {
-        "student_count": student_count,
+        "student_count": count,
         "class_average": class_average,
         "highest_average": highest_average,
         "lowest_average": lowest_average,
@@ -108,3 +91,42 @@ def get_top_student(students):
         key=lambda student:
         student.calculate_average()
     )
+
+
+def get_students_by_class(
+    students,
+    class_name
+):
+
+    return [
+        student
+        for student in students
+        if student.class_name.lower()
+        == class_name.lower()
+    ]
+
+
+def get_subject_average(
+    students,
+    subject
+):
+
+    marks = []
+
+    for student in students:
+
+        for student_subject, mark in (
+            student.subjects.items()
+        ):
+
+            if (
+                student_subject.lower()
+                == subject.lower()
+            ):
+
+                marks.append(mark)
+
+    if not marks:
+        return 0
+
+    return sum(marks) / len(marks)

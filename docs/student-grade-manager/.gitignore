@@ -1,4 +1,26 @@
-
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Test and coverage files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated reports
+report_*.txt
+school_report.txt
 class_report.txt
+
+# Editor files
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db

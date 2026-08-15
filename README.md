@@ -1,45 +1,47 @@
-# Student Grade Manager
+# School Grade Management System
 
-A Python command-line application for managing student records, marks, grades, statistics, and reports.
+A Python-based school grade management system designed as the second version of the Student Grade Manager project.
 
 ## Features
 
 - Add students
-- Automatically generate student IDs
-- Prevent duplicate student names
-- Store student marks
+- Automatic student IDs
+- Store class information
+- Store multiple subjects
+- Store marks for each subject
 - Calculate student averages
 - Automatically assign grades
-- Show all students
-- Search for students by ID
-- Edit student marks
+- Search students
+- Edit student information
 - Remove students
-- Find the top-performing student
+- Filter students by class
+- Find the top student
 - Calculate class statistics
-- Sort students by name or average
-- Export a class report
-- Save student data using JSON
+- Calculate subject averages
+- Export school and class reports
+- JSON data storage
 - Automated unit tests
 
-## Technologies
+## Grade System
 
-- Python
-- JSON
-- Object-Oriented Programming
-- File handling
-- Python `unittest`
-- Git and GitHub
+| Average | Grade |
+|---:|:---:|
+| 80–100 | A |
+| 70–79 | B |
+| 60–69 | C |
+| 50–59 | D |
+| Below 50 | F |
 
 ## Project Structure
 
 ```text
-student-grade-manager/
-├── grade_manager.py
+school-grade-system/
+├── main.py
 ├── student.py
 ├── calculations.py
 ├── storage.py
-├── .gitignore
+├── students.json
 ├── README.md
 └── tests/
-    ├── test_calculations.py
-    └── test_student.py
+    ├── test_student.py
+    └── test_calculations.py
